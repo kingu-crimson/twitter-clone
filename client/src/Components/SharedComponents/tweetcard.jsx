@@ -26,9 +26,9 @@ const Tweetcard = ({ tweet, user }) => {
                 tweet.image.length > 0 && <div className='postimg' style={{ backgroundImage: `url(${tweet.image})` }}></div>
             }
             <div className='counters' style={{ marginTop: '15px' }}>
-                <small className='counter1' style={{ marginRight: '22px' }}>200 comments</small>
+                <small className='counter1' style={{ marginRight: '22px' }}>{tweet.comments.length} comments</small>
                 {/* <small className='counter2'>23k Retweets</small> */}
-                <small className='counter3'>234 Saved</small>
+                <small className='counter3'>{tweet.tweet_likes.length} Likes</small>
             </div>
             {/* <div className='line'></div> */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', marginTop: '15px' }}>
