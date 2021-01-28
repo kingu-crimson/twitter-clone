@@ -14,11 +14,13 @@ const Tweetcard = ({ tweet, user }) => {
     return (
 
         <div className='tweet-container'>
-            <div className='user'>
-                <div className='userimg' style={{ backgroundImage: `url(${tweet.userImage})` }}></div>
-                <h3 className='username'>{tweet.user}</h3>
-                <small className='date'>12 april at 12:02</small>
-            </div>
+            <Link to={user.id === tweet.user_id ? `/profile` : `/profile/${tweet.user_id}`}>
+                <div className='user'>
+                    <div className='userimg' style={{ backgroundImage: `url(${tweet.userImage})` }}></div>
+                    <h3 className='username'>{tweet.user}</h3>
+                    <small className='date'>12 april at 12:02</small>
+                </div>
+            </Link>
             <h3 className='content'>{tweet.content}   </h3>
             {
                 tweet.image.length > 0 && <div className='postimg' style={{ backgroundImage: `url(${tweet.image})` }}></div>
