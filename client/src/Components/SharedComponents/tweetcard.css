@@ -212,3 +212,57 @@ border: 1px solid #F2F2F2;
 .comment:focus {
     outline:3px solid transparent;
 }
+
+.comments{
+    margin-top: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.comments_img{
+    margin: 5px;
+    width: 40px;
+    height: 40px;
+    background: url('https://www.personality-database.com/profile_images/121360.png?id=107143');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+}
+
+.comments_details{
+    width: 80%;
+    padding: 10px;
+}
+
+.comments_details div p{
+    /* margin-top: 2px; */
+    margin-left: 20px;
+}
+
+.comments_name{
+    margin-top: 2px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 21px;
+    letter-spacing: -0.035em;
+    color: #000000;
+}
+
+.comments_date{
+    margin-top: 6px;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.035em;
+    color: #BDBDBD;
+}
+
+.comments_details p{
+    text-align: start;
+}
+

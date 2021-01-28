@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './tweetcard.css'
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
@@ -8,8 +8,46 @@ import SyncRoundedIcon from '@material-ui/icons/SyncRounded';
 import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
 import BookmarkBorderRoundedIcon from '@material-ui/icons/BookmarkBorderRounded';
 
+import Comment from './Comment'
+
 
 const Tweetcard = ({ tweet, user }) => {
+    const [comments, setComments] = useState([])
+    const [comment, setComment] = useState('')
+
+    useEffect(() => {
+        getComments()
+    }, [])
+
+    const getComments = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: tweet.id })
+        }
+        fetch('http://127.0.0.1:8000/tweet/details', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data)
+                setComments(data.comments)
+            })
+    }
+
+    const postComments = (e) => {
+        e.preventDefault()
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tweet_id: tweet.id, user_id: user.id, content: comment })
+        }
+        fetch('http://127.0.0.1:8000/comment/', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data)
+                setComment('')
+                setComments([...comments, data])
+            })
+    }
 
     return (
 
@@ -40,9 +78,13 @@ const Tweetcard = ({ tweet, user }) => {
 
             {/* <div className='line'></div> */}
             <div className='myuserimg' style={{ marginTop: '10px', backgroundImage: `url(${user.image})` }}></div>
-            <form className='comment' style={{ marginTop: '15px' }}>
-                <input className='comment' placeholder='Tweet your reply'></input>
+            <form onSubmit={postComments} className='comment' style={{ marginTop: '15px' }}>
+                <input className='comment' placeholder='Tweet your reply' onChange={(e) => setComment(e.target.value)} value={comment}></input>
             </form>
+            {
+                comments && comments.map((comment, i) => <Comment key={i} comment={comment} />)
+            }
+
         </div>
 
     )
