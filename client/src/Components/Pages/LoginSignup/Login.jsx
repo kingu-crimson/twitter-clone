@@ -28,7 +28,7 @@ const Login = ({ login }) => {
                 <form onSubmit={e => onSubmit(e)} style={{ display: 'flex', alignItems: 'center' }}>
                     <TextField variant="outlined" type="email" name="email" placeholder="Email" onChange={e => onChange(e)} required style={{ marginRight: '20px' }} />
                     <TextField variant="outlined" type="password" name="password" placeholder="Password" onChange={e => onChange(e)} required minLength='8' style={{ marginRight: '20px' }} />
-                    <Button type='button' color="primary" variant="contained" size="large" value='Signin' onClick={onSubmit}  > SignIn </Button>
+                    <Button type='submit' color="primary" variant="contained" size="large" value='Signin' onClick={onSubmit}  > SignIn </Button>
                 </form>
                 <Link to='/signup' style={{ textDecoration: 'none' }}><p className='login__signup'>Sign Up</p></Link>
             </div>

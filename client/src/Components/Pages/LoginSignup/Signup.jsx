@@ -34,7 +34,7 @@ const Signup = ({ register }) => {
                 <TextField variant="outlined" type="text" name="name" placeholder="Enter Your Name .." onChange={e => onChange(e)} required />
                 <TextField variant="outlined" type="email" name="email" placeholder="Enter Your Email .." onChange={e => onChange(e)} required />
                 <TextField variant="outlined" type="password" name="password" placeholder="Enter Your Password .." onChange={e => onChange(e)} required minLength='8' />
-                <Button onClick={onSubmit} type='button' color="primary" variant="contained" size="large" value='Signup' style={{ marginTop: '30px' }}> Sign Up </Button>
+                <Button onClick={onSubmit} type='submit' color="primary" variant="contained" size="large" value='Signup' style={{ marginTop: '30px' }}> Sign Up </Button>
             </form>
         </div>
     )
