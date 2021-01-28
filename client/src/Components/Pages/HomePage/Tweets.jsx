@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from "react-router-dom";
-import Tweet from './Tweet'
-import Tweets from './Tweets'
+import React, { useEffect, useState } from 'react'
+import TweetCard from '../../SharedComponents/tweetcard'
 
-import './Home.css'
-const Home = () => {
-
+const Tweets = () => {
     const [tweets, setTweets] = useState(null)
 
     useEffect(() => {
@@ -26,14 +22,12 @@ const Home = () => {
     }
 
     return (
-        <div className='home'>
-            {/* <div className='home__img'></div> */}
-            <Tweet tweets={tweets} />
-            <Tweets tweets={tweets} />
+        <div className='tweets'>
+            {
+                tweets && tweets.map((tweet, id) => <TweetCard key={id} tweet={tweet} />)
+            }
         </div>
     )
 }
 
-
-
-export default Home
+export default Tweets
