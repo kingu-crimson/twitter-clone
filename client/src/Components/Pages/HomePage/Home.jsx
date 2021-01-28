@@ -7,6 +7,7 @@ import './Home.css'
 const Home = () => {
 
     const [tweets, setTweets] = useState(null)
+    // console.log('changed', tweets)
 
     useEffect(() => {
         getTweets()
@@ -28,7 +29,7 @@ const Home = () => {
     return (
         <div className='home'>
             {/* <div className='home__img'></div> */}
-            <Tweet tweets={tweets} />
+            <Tweet setTweets={setTweets} tweets={tweets} getTweets={getTweets} />
             <Tweets tweets={tweets} />
         </div>
     )

@@ -49,7 +49,6 @@ const Tweetcard = ({ tweet, user }) => {
 
 const mapStateToProps = ({ user: { user } }) => {
     return {
-
         user
     }
 }
