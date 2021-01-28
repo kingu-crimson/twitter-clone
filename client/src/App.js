@@ -5,6 +5,7 @@ import Home from  './Components/Pages/Home';
 import Profile from './Components/Pages/Profile'
 import Login from './Components/Pages/Login';
 import Signup from './Components/Pages/Signup';
+import Tweetcard from './Components/SharedComponents/tweetcard';
 
 
 
@@ -22,7 +23,7 @@ function App() {
       <Route path="/Bookmarks" exact component={Bookmarks} />
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={Signup} />
-
+      <Route path="/Tweetcard" exact component={Tweetcard} />
       </Switch>
       </Router>
     </div>
