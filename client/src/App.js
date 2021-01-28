@@ -6,10 +6,12 @@ import Bookmarks from './Components/Pages/Bookmarks';
 import Explore from './Components/Pages/Explore';
 import Home from './Components/Pages/HomePage/Home';
 import Profile from './Components/Pages/Profile'
+import Tweetcard from './Components/SharedComponents/tweetcard';
 import Login from './Components/Pages/LoginSignup/Login';
 import Signup from './Components/Pages/LoginSignup/Signup';
 import Header from './Components/SharedComponents/Header'
 import UserProfile from './Components/Pages/UsersProfile/UserProfile'
+
 
 import './App.css';
 import { load_user } from './Redux/User/userActions';
@@ -26,6 +28,7 @@ const App = ({ isAuthenticated, load_user }) => {
   return (
     <div className="App">
       <Router>
+
         {
           isAuthenticated && <Header />
         }
