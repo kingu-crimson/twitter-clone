@@ -102,3 +102,11 @@
     color: #FFFFFF;
     margin: 0;
 }
+
+
+.tweets{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    
+}
