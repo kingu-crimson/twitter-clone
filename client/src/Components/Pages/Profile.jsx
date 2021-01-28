@@ -1,19 +1,17 @@
 import React from 'react'
 import './Profile.css'
 import { Link } from "react-router-dom";
-import Header from "../SharedComponents/Header"
-class Profile extends React.Component {
-    componentDidMount() {
 
-    }
-    render() {
 
-        return (
-            <>
-            </>
-        )
-    }
+
+const Profile = () => {
+    return (
+        <div>
+            <h1>Profile</h1>
+        </div>
+    )
 }
+
 
 
 
