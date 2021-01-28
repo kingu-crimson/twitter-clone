@@ -1,0 +1,48 @@
+.header{
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.header__icon{
+    width: 60px;
+    object-fit: contain;
+    border-radius: 40px;
+}
+
+.header__taps{
+    display: flex;
+    justify-content: space-between;
+    width: 20%;
+    align-items: center;
+}
+
+.header__taps p{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    /* identical to box height */
+    letter-spacing: -0.035em;
+    /* Blue 1 */
+    color: #2F80ED;
+}
+
+.header__profile{
+    display: flex;
+    align-items: center;
+}
+
+.header__profile p{
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.035em;
+    color: #333333;
+    margin-left: 20px;
+}

@@ -1,41 +1,44 @@
-import {UserActionTypes} from './userTypes'
+import { UserActionTypes } from './userTypes'
 
 const initialState = {
-    access : localStorage.getItem('access'),
-    refresh : localStorage.getItem('refresh'),
-    isAuthenticated:null,
-    user:null
+    access: localStorage.getItem('access'),
+    refresh: localStorage.getItem('refresh'),
+    isAuthenticated: null,
+    user: null
 };
- const userReducer  = function(state = initialState,action){
-    const{ type,payload} = action
-    switch(type) {
+const userReducer = function (state = initialState, action) {
+    const { type, payload } = action
+    switch (type) {
         case UserActionTypes.LOGIN_SUCCESS:
-            localStorage.setItem('access',payload.access)
+            localStorage.setItem('access', payload.access)
             return {
                 ...state,
-                isAuthenticated: true,
                 access: payload.access,
                 refresh: payload.refresh,
 
             }
         case UserActionTypes.USER_LOADED_SUCCESS:
+            localStorage.setItem('id', payload.id)
             return {
                 ...state,
+                isAuthenticated: true,
                 user: payload
             }
         case UserActionTypes.USER_LOADED_FAIL:
+            // localStorage.removeItem('access')
             return {
                 ...state,
+                isAuthenticated: null,
                 user: null
             }
         case UserActionTypes.LOGIN_FAIL:
             localStorage.removeItem('access')
             localStorage.removeItem('refresh')
-            return{
+            return {
                 ...state,
-                access:null,
-                refresh:null,
-                isAuthenticated : false,
+                access: null,
+                refresh: null,
+                isAuthenticated: false,
                 user: null,
             }
         default:
