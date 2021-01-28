@@ -5,4 +5,4 @@ class LikeSerializer(serializers.ModelSerializer):
     user = serializers.CharField(source='user_id.name', read_only=True )
     class Meta:
         model = Like
-        fields = ('user_id', 'tweet_id', 'user')
+        fields = ('id','user_id', 'tweet_id', 'user')
