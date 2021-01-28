@@ -9,4 +9,4 @@ class TweetSerializer(serializers.ModelSerializer):
     tweet_likes = LikeSerializer(many=True, read_only=True)
     class Meta:
         model = Tweet
-        fields = ('id', 'user', 'content', 'image', 'created_at', 'comments', 'tweet_likes')
+        fields = ('id', 'user_id', 'user', 'content', 'image', 'created_at', 'comments', 'tweet_likes')
