@@ -13,6 +13,7 @@ import Comment from './Comment'
 
 const Tweetcard = ({ tweet, user }) => {
     const [comments, setComments] = useState([])
+    const [likes, setLikes] = useState([])
     const [comment, setComment] = useState('')
 
     useEffect(() => {
@@ -30,8 +31,10 @@ const Tweetcard = ({ tweet, user }) => {
             .then(data => {
                 // console.log(data)
                 setComments(data.comments)
+                setLikes(data.tweet_likes)
             })
     }
+
 
     const postComments = (e) => {
         e.preventDefault()
@@ -49,6 +52,25 @@ const Tweetcard = ({ tweet, user }) => {
             })
     }
 
+    const postLike = (e) => {
+        e.preventDefault()
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tweet_id: tweet.id, user_id: user.id })
+        }
+        fetch('http://127.0.0.1:8000/like/', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                if (data.id) {
+                    setLikes([...likes, data])
+                } else {
+                    throw Error
+                }
+
+            }).catch(() => alert(`you can't like twice`))
+    }
+
     return (
 
         <div className='tweet-container'>
@@ -64,15 +86,15 @@ const Tweetcard = ({ tweet, user }) => {
                 tweet.image.length > 0 && <div className='postimg' style={{ backgroundImage: `url(${tweet.image})` }}></div>
             }
             <div className='counters' style={{ marginTop: '15px' }}>
-                <small className='counter1' style={{ marginRight: '22px' }}>{tweet.comments.length} comments</small>
+                <small className='counter1' style={{ marginRight: '22px' }}>{comments.length} comments</small>
                 {/* <small className='counter2'>23k Retweets</small> */}
-                <small className='counter3'>{tweet.tweet_likes.length} Likes</small>
+                <small className='counter3'>{likes.length} Likes</small>
             </div>
             {/* <div className='line'></div> */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', marginTop: '15px' }}>
                 <button style={{ display: 'flex', alignItems: 'center' }}><AddCommentIcon />Comments</button>
                 {/* <button className='retweet'><SyncRoundedIcon />Retweet</button> */}
-                <button style={{ display: 'flex', alignItems: 'center' }}><FavoriteBorderRoundedIcon />Likes</button>
+                <button onClick={postLike} style={{ display: 'flex', alignItems: 'center' }}><FavoriteBorderRoundedIcon style={likes.length ? { color: 'red' } : {}} />Likes</button>
                 <button style={{ display: 'flex', alignItems: 'center' }}><BookmarkBorderRoundedIcon />Saved</button>
             </div>
 
