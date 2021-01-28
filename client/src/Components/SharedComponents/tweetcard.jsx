@@ -56,7 +56,7 @@ const Tweetcard = ({ tweet, user }) => {
                 <div className='user'>
                     <div className='userimg' style={{ backgroundImage: `url(${tweet.userImage})` }}></div>
                     <h3 className='username'>{tweet.user}</h3>
-                    <small className='date'>12 april at 12:02</small>
+                    <small className='date'>{tweet.created_at.split('T')[0]}</small>
                 </div>
             </Link>
             <h3 className='content'>{tweet.content}   </h3>

@@ -227,6 +227,7 @@ border: 1px solid #F2F2F2;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    border-radius: 4px;
     
 }
 
@@ -238,6 +239,7 @@ border: 1px solid #F2F2F2;
 .comments_details div p{
     /* margin-top: 2px; */
     margin-left: 20px;
+    margin-bottom: 4px;
 }
 
 .comments_name{
@@ -263,6 +265,15 @@ border: 1px solid #F2F2F2;
 }
 
 .comments_details p{
+    margin-left: 10px;
     text-align: start;
+    margin-top: 0px;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 22px;
+    letter-spacing: -0.035em;
+    color: #4F4F4F;
 }
 
