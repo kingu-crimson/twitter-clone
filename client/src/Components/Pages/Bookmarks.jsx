@@ -1,19 +1,15 @@
 import React from 'react'
 import './Bookmarks.css'
 import { Link } from "react-router-dom";
-import Header from "../SharedComponents/Header"
 
-class Bookmarks extends React.Component {
-    componentDidMount() {
+const Bookmarks = () => {
 
-    }
-    render() {
+    return (
+        <div>
+            <h1>Bookmarks</h1>
+        </div>
 
-        return (
-            <>
-            </>
-        )
-    }
+    )
 }
 
 

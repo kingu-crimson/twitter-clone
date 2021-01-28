@@ -1,32 +1,58 @@
-import './App.css';
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+
 import Bookmarks from './Components/Pages/Bookmarks';
 import Explore from './Components/Pages/Explore';
-import Home from  './Components/Pages/Home';
+import Home from './Components/Pages/HomePage/Home';
 import Profile from './Components/Pages/Profile'
-import Login from './Components/Pages/Login';
-import Signup from './Components/Pages/Signup';
+import Login from './Components/Pages/LoginSignup/Login';
+import Signup from './Components/Pages/LoginSignup/Signup';
+import Header from './Components/SharedComponents/Header'
+import UserProfile from './Components/Pages/UsersProfile/UserProfile'
+
+import './App.css';
+import { load_user } from './Redux/User/userActions';
 
 
+const App = ({ isAuthenticated, load_user }) => {
+  console.log(isAuthenticated)
 
+  useEffect(() => {
+    console.log('sss')
+    load_user()
+  }, [])
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-function App() {
   return (
     <div className="App">
       <Router>
-      <Switch>
-      <Route path="/Home" exact component={Home} />
-      <Route path="/Profile" exact component={Profile} />
-      <Route path="/Explore" exact component={Explore} />
-      <Route path="/Bookmarks" exact component={Bookmarks} />
-      <Route path="/login" exact component={Login} />
-      <Route path="/signup" exact component={Signup} />
-
-      </Switch>
+        {
+          isAuthenticated && <Header />
+        }
+        <Switch>
+          <Route path="/" exact render={(props) => !isAuthenticated ? <Login {...props} /> : <Redirect to='/home' />} />
+          <Route path="/signup" exact render={(props) => !isAuthenticated ? <Signup {...props} /> : <Redirect to='/home' />} />
+          <Route path="/home" exact render={(props) => isAuthenticated ? <Home {...props} /> : <Redirect to='/' />} />
+          <Route path="/Profile" exact render={(props) => isAuthenticated ? <Profile {...props} /> : <Redirect to='/' />} />
+          <Route path="/Profile/:id" exact render={(props) => isAuthenticated ? <UserProfile {...props} /> : <Redirect to='/' />} />
+          <Route path="/Explore" exact render={(props) => isAuthenticated ? <Explore {...props} /> : <Redirect to='/' />} />
+          <Route path="/Bookmarks" exact render={(props) => isAuthenticated ? <Bookmarks {...props} /> : <Redirect to='/' />} />
+        </Switch>
       </Router>
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = ({ user: { isAuthenticated } }) => {
+  return {
+    isAuthenticated
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    load_user: () => dispatch(load_user())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
