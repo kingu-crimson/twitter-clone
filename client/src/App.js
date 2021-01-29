@@ -12,13 +12,12 @@ import Signup from './Components/Pages/LoginSignup/Signup';
 import Header from './Components/SharedComponents/Header'
 import UserProfile from './Components/Pages/UsersProfile/UserProfile'
 
-
 import './App.css';
 import { load_user } from './Redux/User/userActions';
 
 
 const App = ({ isAuthenticated, load_user }) => {
-  console.log(isAuthenticated)
+  // console.log(isAuthenticated)
 
   useEffect(() => {
     console.log('sss')

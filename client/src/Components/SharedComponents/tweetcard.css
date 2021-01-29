@@ -32,9 +32,9 @@ background-position: center;
 }
 .username{
 position:absolute;
-width: 100px;
+/* width: 100px; */
 height: 48px;
-left: 70px;
+left: 90px;
 top: 4px;
 font-family: Poppins;
 font-style: normal;

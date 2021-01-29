@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import './tweetcard.css'
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
+import { useSnackbar } from 'notistack';
 
 import AddCommentIcon from '@material-ui/icons/AddComment';
 import SyncRoundedIcon from '@material-ui/icons/SyncRounded';
 import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
 import BookmarkBorderRoundedIcon from '@material-ui/icons/BookmarkBorderRounded';
+
 
 import Comment from './Comment'
 
@@ -16,6 +18,8 @@ const Tweetcard = ({ tweet, user }) => {
     const [likes, setLikes] = useState([])
     const [bookmarks, setBookmarks] = useState([])
     const [comment, setComment] = useState('')
+
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         getComments()
@@ -70,26 +74,32 @@ const Tweetcard = ({ tweet, user }) => {
                     throw Error
                 }
 
-            }).catch(() => alert(`you can't like twice`))
+            }).catch(() => enqueueSnackbar('You can only like once', { variant: 'error', autoHideDuration: 1500 }))
     }
 
     const addBookMark = (e) => {
         e.preventDefault()
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ tweet_id: tweet.id, user_id: user.id })
+        if (user.id !== tweet.user_id) {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tweet_id: tweet.id, user_id: user.id })
+            }
+            fetch('http://127.0.0.1:8000/favourite/', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.id) {
+                        setBookmarks([...bookmarks, data])
+                        enqueueSnackbar('Saved to your bookmarks', { variant: 'success', autoHideDuration: 1500 })
+                    } else {
+                        throw Error
+                    }
+                }).catch(() => enqueueSnackbar('Already Added to your bookmarks', { variant: 'error', autoHideDuration: 1500 }))
+
+        } else {
+            enqueueSnackbar(`maaan its your tweet, you can't add it MR ${user.name}`, { variant: 'warning', autoHideDuration: 1500 })
         }
-        fetch('http://127.0.0.1:8000/favourite/', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                // console.log(data)
-                if (data.id) {
-                    setBookmarks([...bookmarks, data])
-                } else {
-                    throw Error
-                }
-            }).catch(() => alert('Already added to your bookmarks'))
+
     }
 
     return (
