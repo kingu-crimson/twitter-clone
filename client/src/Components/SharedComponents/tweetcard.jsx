@@ -130,10 +130,12 @@ const Tweetcard = ({ tweet, user }) => {
             </div>
 
             {/* <div className='line'></div> */}
-            <div className='myuserimg' style={{ marginTop: '10px', backgroundImage: `url(${user.image})` }}></div>
-            <form onSubmit={postComments} className='comment' style={{ marginTop: '15px' }}>
-                <input className='comment' placeholder='Tweet your reply' onChange={(e) => setComment(e.target.value)} value={comment}></input>
-            </form>
+            <div style={{ display: 'flex' }}>
+                <div className='myuserimg' style={{ marginTop: '10px', backgroundImage: `url(${user.image})` }}></div>
+                <form onSubmit={postComments} style={{ marginTop: '15px', width: '91%' }}>
+                    <input className='comment' placeholder='Tweet your reply' onChange={(e) => setComment(e.target.value)} value={comment}></input>
+                </form>
+            </div>
             {
                 comments && comments.map((comment, i) => <Comment key={i} comment={comment} />)
             }
