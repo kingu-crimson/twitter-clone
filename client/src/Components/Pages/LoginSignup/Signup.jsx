@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from "react-router-dom";
 import { TextField, Button } from '@material-ui/core';
 import { connect } from 'react-redux'
+import { useSnackbar } from 'notistack';
 
 import { register } from '../../../Redux/User/userActions'
 
@@ -13,17 +14,22 @@ const Signup = ({ register }) => {
         email: '',
         password: ''
     })
-    // console.log(data)
 
+    const { enqueueSnackbar } = useSnackbar();
+    var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
 
     const onChange = e => setData({ ...data, [e.target.name]: e.target.value });
 
     const onSubmit = e => {
         e.preventDefault()
-        // console.log('onsubmit')
         const { name, email, password } = data
-        const image = 'https://lh3.googleusercontent.com/proxy/6JI7rDICjHdO7jFlNs2n5ftsSwBFqTj7oU0I_BgJE09kfq22ED4zMBhXfPbRGfMjHUavGSlFxUji0zo8j2A2Hr0tUDO1pk4SjW-_0P__Sjt1d24Q_CRWvA'
-        register(name, email, password, image);
+        if (mediumRegex.test(password)) {
+            const image = 'https://lh3.googleusercontent.com/proxy/6JI7rDICjHdO7jFlNs2n5ftsSwBFqTj7oU0I_BgJE09kfq22ED4zMBhXfPbRGfMjHUavGSlFxUji0zo8j2A2Hr0tUDO1pk4SjW-_0P__Sjt1d24Q_CRWvA'
+            register(name, email, password, image)
+        } else {
+            enqueueSnackbar('Maan please enter a good password', { variant: 'error', autoHideDuration: 1500 })
+        }
+
     }
 
     return (
@@ -34,7 +40,7 @@ const Signup = ({ register }) => {
                 <TextField variant="outlined" type="text" name="name" placeholder="Enter Your Name .." onChange={e => onChange(e)} required />
                 <TextField variant="outlined" type="email" name="email" placeholder="Enter Your Email .." onChange={e => onChange(e)} required />
                 <TextField variant="outlined" type="password" name="password" placeholder="Enter Your Password .." onChange={e => onChange(e)} required minLength='8' />
-                <Button onClick={onSubmit} type='submit' color="primary" variant="contained" size="large" value='Signup' style={{ marginTop: '30px' }}> Sign Up </Button>
+                <Button type='submit' color="primary" variant="contained" size="large" value='Signup' style={{ marginTop: '30px' }}> Sign Up </Button>
             </form>
         </div>
     )

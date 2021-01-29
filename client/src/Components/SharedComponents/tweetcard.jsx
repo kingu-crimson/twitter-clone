@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import './tweetcard.css'
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux'
+import { useSnackbar } from 'notistack';
 
 import AddCommentIcon from '@material-ui/icons/AddComment';
 import SyncRoundedIcon from '@material-ui/icons/SyncRounded';
 import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
 import BookmarkBorderRoundedIcon from '@material-ui/icons/BookmarkBorderRounded';
+
 
 import Comment from './Comment'
 
@@ -14,7 +16,10 @@ import Comment from './Comment'
 const Tweetcard = ({ tweet, user }) => {
     const [comments, setComments] = useState([])
     const [likes, setLikes] = useState([])
+    const [bookmarks, setBookmarks] = useState([])
     const [comment, setComment] = useState('')
+
+    const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         getComments()
@@ -32,6 +37,7 @@ const Tweetcard = ({ tweet, user }) => {
                 // console.log(data)
                 setComments(data.comments)
                 setLikes(data.tweet_likes)
+                setBookmarks(data.tweet_bookmarks)
             })
     }
 
@@ -68,7 +74,32 @@ const Tweetcard = ({ tweet, user }) => {
                     throw Error
                 }
 
-            }).catch(() => alert(`you can't like twice`))
+            }).catch(() => enqueueSnackbar('You can only like once', { variant: 'error', autoHideDuration: 1500 }))
+    }
+
+    const addBookMark = (e) => {
+        e.preventDefault()
+        if (user.id !== tweet.user_id) {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tweet_id: tweet.id, user_id: user.id })
+            }
+            fetch('http://127.0.0.1:8000/favourite/', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.id) {
+                        setBookmarks([...bookmarks, data])
+                        enqueueSnackbar('Saved to your bookmarks', { variant: 'success', autoHideDuration: 1500 })
+                    } else {
+                        throw Error
+                    }
+                }).catch(() => enqueueSnackbar('Already Added to your bookmarks', { variant: 'error', autoHideDuration: 1500 }))
+
+        } else {
+            enqueueSnackbar(`maaan its your tweet, you can't add it MR ${user.name}`, { variant: 'warning', autoHideDuration: 1500 })
+        }
+
     }
 
     return (
@@ -87,15 +118,15 @@ const Tweetcard = ({ tweet, user }) => {
             }
             <div className='counters' style={{ marginTop: '15px' }}>
                 <small className='counter1' style={{ marginRight: '22px' }}>{comments.length} comments</small>
-                {/* <small className='counter2'>23k Retweets</small> */}
+                <small className='counter2' style={{ marginRight: '22px' }}>{bookmarks.length} Saved</small>
                 <small className='counter3'>{likes.length} Likes</small>
             </div>
             {/* <div className='line'></div> */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', marginTop: '15px' }}>
-                <button style={{ display: 'flex', alignItems: 'center' }}><AddCommentIcon />Comments</button>
+                <button style={{ display: 'flex', alignItems: 'center' }}><AddCommentIcon style={comments.length ? { color: 'green' } : {}} />Comments</button>
                 {/* <button className='retweet'><SyncRoundedIcon />Retweet</button> */}
                 <button onClick={postLike} style={{ display: 'flex', alignItems: 'center' }}><FavoriteBorderRoundedIcon style={likes.length ? { color: 'red' } : {}} />Likes</button>
-                <button style={{ display: 'flex', alignItems: 'center' }}><BookmarkBorderRoundedIcon />Saved</button>
+                <button onClick={addBookMark} style={{ display: 'flex', alignItems: 'center' }}><BookmarkBorderRoundedIcon style={bookmarks.length ? { color: 'Blue' } : {}} />Saved</button>
             </div>
 
             {/* <div className='line'></div> */}

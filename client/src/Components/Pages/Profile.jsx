@@ -10,6 +10,7 @@ import './Profile.css'
 
 const Profile = ({ user }) => {
     const [tweets, setTweets] = useState(null)
+    const [profile, setProfile] = useState(null)
 
     useEffect(() => {
         getTweets()
@@ -25,6 +26,7 @@ const Profile = ({ user }) => {
             .then(response => response.json())
             .then(data => {
                 console.log(data)
+                setProfile(data)
                 setTweets(data.tweets)
             })
     }
@@ -32,6 +34,17 @@ const Profile = ({ user }) => {
 
     return (
         <div className='profile'>
+            <div className='home__img'></div>
+            <div className='profile__details'>
+                <div className='profile__img' style={{ backgroundImage: `url(${user.image})` }}>
+                    <div className='details__info'>
+                        <p className='profile__name'>{profile && profile.name}</p>
+                        <p><span className='follow'><span style={{ marginRight: '7px', fontWeight: '600' }}>{profile && profile.userTo.length}</span> Following</span></p>
+                        <p><span className='follow'><span style={{ marginRight: '7px', fontWeight: '600' }}>{profile && profile.userFrom.length}</span> Followers</span></p>
+                    </div>
+                </div>
+
+            </div>
             <div className='tweets'>
                 {
                     tweets && tweets.map((tweet, id) => <TweetCard key={id} tweet={tweet} />)

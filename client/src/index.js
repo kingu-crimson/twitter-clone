@@ -3,18 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import { store, persistor } from "./Redux/store"
 import { PersistGate } from 'redux-persist/integration/react';
+import { SnackbarProvider } from 'notistack';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
+
+  <Provider store={store}>
     <PersistGate persistor={persistor}>
+      <SnackbarProvider maxSnack={3} anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
+      >
         <App />
+      </SnackbarProvider>
     </PersistGate>
-  </Provider> 
-  </React.StrictMode>,
+  </Provider>
+  ,
   document.getElementById('root')
 );
 
