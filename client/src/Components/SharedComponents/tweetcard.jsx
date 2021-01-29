@@ -83,9 +83,13 @@ const Tweetcard = ({ tweet, user }) => {
         fetch('http://127.0.0.1:8000/favourite/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-                setBookmarks([...bookmarks, data])
-            })
+                // console.log(data)
+                if (data.id) {
+                    setBookmarks([...bookmarks, data])
+                } else {
+                    throw Error
+                }
+            }).catch(() => alert('Already added to your bookmarks'))
     }
 
     return (
