@@ -28,7 +28,7 @@ const Home = () => {
 
     return (
         <div className='home'>
-            {/* <div className='home__img'></div> */}
+
             <Tweet setTweets={setTweets} tweets={tweets} />
             <Tweets tweets={tweets} />
         </div>

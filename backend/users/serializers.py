@@ -20,7 +20,8 @@ class UserSerializered(serializers.ModelSerializer):
     user_comments = CommentSerializer(many=True, read_only=True)
     user_likes = LikeSerializer(many=True, read_only=True)
     userFrom = FollowerSerializer(many=True, read_only=True)
+    userTo = FollowerSerializer(many=True, read_only=True)
     user_bookmarks = FavouriteSerializer(many=True, read_only=True)
     class Meta:
         model = User
-        fields = ('id' , 'email', 'name', 'image', 'tweets', 'user_comments','user_likes', 'userFrom', 'user_bookmarks')
+        fields = ('id' , 'email', 'name', 'image', 'tweets', 'user_comments','user_likes', 'userFrom', 'userTo', 'user_bookmarks')

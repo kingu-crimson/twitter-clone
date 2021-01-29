@@ -13,7 +13,9 @@ const Header = ({ user }) => {
     }
     return (
         <div className='header'>
-            <img src='https://cdn.dribbble.com/users/3749472/screenshots/6893259/birdicon_1x.png?compress=1&resize=400x300' className='header__icon' alt='icon' />
+            <div style={{ width: '33%', display: 'flex', justifyContent: 'flex-start' }}>
+                <img src='https://cdn.dribbble.com/users/3749472/screenshots/6893259/birdicon_1x.png?compress=1&resize=400x300' className='header__icon' alt='icon' />
+            </div>
             <div className='header__taps'>
                 <Link to='/home' style={{ textDecoration: 'none' }}><p>Home</p></Link>
                 <Link to='/explore' style={{ textDecoration: 'none' }}><p>Explore</p></Link>
