@@ -16,3 +16,13 @@ def details(request):
     tweet = Tweet.objects.get(id=request.data['id'])
     serializer = TweetSerializer(tweet, many=False)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def bookmakrs(request):
+    bookmakrs = []
+    for v in request.data['user_bookmarks']:
+        tweet = Tweet.objects.get(id=v['tweet_id'])
+        bookmakrs.append(tweet)
+    # print(bookmakrs)
+    serializer = TweetSerializer(bookmakrs, many=True)
+    return Response(serializer.data)

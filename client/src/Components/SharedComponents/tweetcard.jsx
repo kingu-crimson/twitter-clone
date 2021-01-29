@@ -14,6 +14,7 @@ import Comment from './Comment'
 const Tweetcard = ({ tweet, user }) => {
     const [comments, setComments] = useState([])
     const [likes, setLikes] = useState([])
+    const [bookmarks, setBookmarks] = useState([])
     const [comment, setComment] = useState('')
 
     useEffect(() => {
@@ -32,6 +33,7 @@ const Tweetcard = ({ tweet, user }) => {
                 // console.log(data)
                 setComments(data.comments)
                 setLikes(data.tweet_likes)
+                setBookmarks(data.tweet_bookmarks)
             })
     }
 
@@ -71,6 +73,21 @@ const Tweetcard = ({ tweet, user }) => {
             }).catch(() => alert(`you can't like twice`))
     }
 
+    const addBookMark = (e) => {
+        e.preventDefault()
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tweet_id: tweet.id, user_id: user.id })
+        }
+        fetch('http://127.0.0.1:8000/favourite/', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setBookmarks([...bookmarks, data])
+            })
+    }
+
     return (
 
         <div className='tweet-container'>
@@ -87,15 +104,15 @@ const Tweetcard = ({ tweet, user }) => {
             }
             <div className='counters' style={{ marginTop: '15px' }}>
                 <small className='counter1' style={{ marginRight: '22px' }}>{comments.length} comments</small>
-                {/* <small className='counter2'>23k Retweets</small> */}
+                <small className='counter2' style={{ marginRight: '22px' }}>{bookmarks.length} Saved</small>
                 <small className='counter3'>{likes.length} Likes</small>
             </div>
             {/* <div className='line'></div> */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', marginTop: '15px' }}>
-                <button style={{ display: 'flex', alignItems: 'center' }}><AddCommentIcon />Comments</button>
+                <button style={{ display: 'flex', alignItems: 'center' }}><AddCommentIcon style={comments.length ? { color: 'green' } : {}} />Comments</button>
                 {/* <button className='retweet'><SyncRoundedIcon />Retweet</button> */}
                 <button onClick={postLike} style={{ display: 'flex', alignItems: 'center' }}><FavoriteBorderRoundedIcon style={likes.length ? { color: 'red' } : {}} />Likes</button>
-                <button style={{ display: 'flex', alignItems: 'center' }}><BookmarkBorderRoundedIcon />Saved</button>
+                <button onClick={addBookMark} style={{ display: 'flex', alignItems: 'center' }}><BookmarkBorderRoundedIcon style={bookmarks.length ? { color: 'Blue' } : {}} />Saved</button>
             </div>
 
             {/* <div className='line'></div> */}
