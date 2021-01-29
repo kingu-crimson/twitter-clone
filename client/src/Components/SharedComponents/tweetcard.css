@@ -32,9 +32,9 @@ background-position: center;
 }
 .username{
 position:absolute;
-width: 100px;
+/* width: 100px; */
 height: 48px;
-left: 70px;
+left: 90px;
 top: 4px;
 font-family: Poppins;
 font-style: normal;
@@ -214,13 +214,13 @@ border: 1px solid #F2F2F2;
 }
 
 .comments{
-    margin-top: 10px;
+    margin-top: 15px;
     display: flex;
     align-items: flex-start;
 }
 
 .comments_img{
-    margin: 5px;
+    /* margin: 5px; */
     width: 40px;
     height: 40px;
     background: url('https://www.personality-database.com/profile_images/121360.png?id=107143');
@@ -232,8 +232,11 @@ border: 1px solid #F2F2F2;
 }
 
 .comments_details{
-    width: 80%;
-    padding: 10px;
+    margin-left: 10px;
+    width: 90%;
+    padding: 5px;
+    background: #FAFAFA;
+    border-radius: 8px;
 }
 
 .comments_details div p{

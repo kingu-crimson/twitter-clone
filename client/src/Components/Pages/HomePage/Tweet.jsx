@@ -1,27 +1,35 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { useSnackbar } from 'notistack';
+
 
 const Tweet = ({ user, tweets, setTweets }) => {
     const [content, setContent] = useState('')
-    // console.log(content)
+    const { enqueueSnackbar } = useSnackbar();
 
     const submitTweet = (e) => {
         e.preventDefault()
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ content, user_id: user.id })
+        if (content.length > 0) {
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content, user_id: user.id })
+            }
+            fetch('http://127.0.0.1:8000/tweet/', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    // window.location.reload()
+                    setTweets([data, ...tweets])
+                    setContent('')
+                })
+        } else {
+
+            enqueueSnackbar('Please write something', { variant: 'error', autoHideDuration: 1000 })
         }
-        fetch('http://127.0.0.1:8000/tweet/', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                // window.location.reload()
-                setTweets([data, ...tweets])
-                setContent('')
-            })
     }
 
     return (
+
         <form className='tweet' onSubmit={submitTweet}>
             <p className='tweet__text'>Tweet Something</p>
             <div className='tweet__border'></div>
@@ -30,6 +38,7 @@ const Tweet = ({ user, tweets, setTweets }) => {
             <button className='tweet__buttom'
                 onClick={submitTweet}><p className='buttom__text'>Tweet</p></button>
         </form>
+
     )
 }
 

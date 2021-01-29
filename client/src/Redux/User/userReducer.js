@@ -34,6 +34,7 @@ const userReducer = function (state = initialState, action) {
         case UserActionTypes.LOGIN_FAIL:
             localStorage.removeItem('access')
             localStorage.removeItem('refresh')
+            alert('are you trying to hack me ?')
             return {
                 ...state,
                 access: null,
