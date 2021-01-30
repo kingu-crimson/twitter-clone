@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 
-const Tweet = ({ user }) => {
+const Tweet = ({ user, tweets, setTweets }) => {
     const [content, setContent] = useState('')
     // console.log(content)
 
@@ -15,7 +15,8 @@ const Tweet = ({ user }) => {
         fetch('http://127.0.0.1:8000/tweet/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                // window.location.reload()
+                setTweets([data, ...tweets])
                 setContent('')
             })
     }
