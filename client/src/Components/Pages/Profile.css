@@ -60,3 +60,9 @@
     line-height: 18px;
     letter-spacing: -0.035em;
 }
+
+.upload{
+    position: absolute;
+    bottom: -8px;
+    left: -50px;
+}

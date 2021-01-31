@@ -63,7 +63,7 @@ const Tweet = ({ user, tweets, setTweets }) => {
                 // className='user_inputfile'
                 onChange={uploadImage}
             />
-            <label className='label' for="file"><WallpaperIcon style={{ color: 'gray' }} /></label>
+            <label className='label' htmlFor="file"><WallpaperIcon style={{ color: 'gray' }} /></label>
             <button className='tweet__buttom'
                 onClick={submitTweet}><p className='buttom__text'>Tweet</p></button>
             {

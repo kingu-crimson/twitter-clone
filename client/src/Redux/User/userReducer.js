@@ -42,6 +42,11 @@ const userReducer = function (state = initialState, action) {
                 isAuthenticated: false,
                 user: null,
             }
+        case UserActionTypes.USER_IMAGE_CHANGE:
+            return {
+                ...state,
+                user: payload
+            }
         default:
             return state
     }

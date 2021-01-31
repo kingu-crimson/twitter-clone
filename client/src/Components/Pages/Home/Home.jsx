@@ -39,6 +39,11 @@ const Explore = ({ user }) => {
             .then(response => response.json())
             .then(data => {
                 console.log('Following', data)
+
+                data.sort(function (a, b) {
+
+                    return new Date(b.created_at) - new Date(a.created_at);
+                })
                 setFollowing(data)
 
             })

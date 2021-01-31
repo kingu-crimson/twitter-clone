@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 
+import { changeImage } from '../../Redux/User/userActions'
 import TweetCard from '../SharedComponents/tweetcard'
 
 import './Profile.css'
 
 
 
-const Profile = ({ user }) => {
+const Profile = ({ user, changeImage }) => {
     const [tweets, setTweets] = useState(null)
     const [profile, setProfile] = useState(null)
+    const [image, setImage] = useState(user.image)
 
     useEffect(() => {
         getTweets()
@@ -31,6 +34,43 @@ const Profile = ({ user }) => {
             })
     }
 
+    const uploadImage = (e) => {
+        const formData = new FormData()
+        formData.append('file', e.target.files[0])
+        formData.append('upload_preset', 'pqcz20rh')
+
+        const requestOptions = {
+            method: 'POST',
+            body: formData
+        };
+        fetch('	https://api.cloudinary.com/v1_1/dzjchtsxn/image/upload', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log('uploaded', data)
+
+                user.image = data.secure_url
+                console.log('dispatched', user)
+                changeImage(user)
+                // setImage(data.secure_url)
+                postImage({ id: user.id, image: data.secure_url })
+            });
+
+    }
+
+    const postImage = (obj) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(obj)
+        }
+        fetch('http://127.0.0.1:8000/user/image', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log('succes', data)
+                window.location.reload()
+            })
+    }
+
 
     return (
         <div className='profile'>
@@ -41,6 +81,14 @@ const Profile = ({ user }) => {
                         <p className='profile__name'>{profile && profile.name}</p>
                         <p><span className='follow'><span style={{ marginRight: '7px', fontWeight: '600' }}>{profile && profile.userTo.length}</span> Following</span></p>
                         <p><span className='follow'><span style={{ marginRight: '7px', fontWeight: '600' }}>{profile && profile.userFrom.length}</span> Followers</span></p>
+                        <input
+                            type="file"
+                            id="file"
+                            name="file"
+                            // className='user_inputfile'
+                            onChange={uploadImage}
+                        />
+                        <label className='upload' htmlFor="file"><PhotoCameraIcon style={{ color: 'gray' }} /></label>
                     </div>
                 </div>
 
@@ -61,7 +109,13 @@ const mapStateToProps = ({ user: { user } }) => {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeImage: user => dispatch(changeImage(user))
+    }
+}
 
 
 
-export default connect(mapStateToProps)(Profile)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)
