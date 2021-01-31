@@ -20,47 +20,44 @@
     position: relative;
 }
 .userimg{
-border-radius: 8px;
-width: 71.16px;
-height: 76.74px;
-left: 512px;
-top: 532.9px;
-background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
-/* background-image: url('https://cdn.discordapp.com/attachments/432585174795026443/804099176320729098/he-has-a-real-life.jpg'); */
+    border-radius: 8px;
+    width: 71.16px;
+    height: 76.74px;
+    left: 512px;
+    top: 532.9px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
 }
 .username{
-position:absolute;
-/* width: 100px; */
-height: 48px;
-left: 90px;
-top: 4px;
-font-family: Poppins;
-font-style: normal;
-font-weight: 500;
-font-size: 20px;
-line-height: 24px;
-letter-spacing: -0.035em;
-color: #000000;
+    position:absolute;
+    /* width: 100px; */
+    height: 48px;
+    left: 90px;
+    top: 4px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.035em;
+    color: #000000;
 }
 
 
 .date{
-position:absolute;
-width: 200px;
-top:60px;
-left: 20px;
-font-family: Noto Sans;
-font-style: normal;
-font-weight: 500;
-font-size: 12px;
-line-height: 16px;
-letter-spacing: -0.035em;
-
-/* Gray 4 */
-
-color: #BDBDBD;
+    position:absolute;
+    width: 200px;
+    top:60px;
+    left: 20px;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.035em;
+    color: #BDBDBD;
 }
 
 .content{
@@ -73,32 +70,29 @@ color: #BDBDBD;
     width: 730px;
     height: auto;
     top: 614.9px;
-/* identical to box height */
-
-letter-spacing: -0.035em;
-
-color: #4F4F4F;
+    letter-spacing: -0.035em;
+    color: #4F4F4F;
 }
+
 .postimg{
-width: 650px;
-height: 328.22px;
-left: 52px;
-top: 655.9px;
-background-image: url('https://www.history.com/.image/t_share/MTU4MDk5NjA0Mjc1OTk2NDQx/africa.jpg');
-border-radius: 8px;
-background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
+    width: 650px;
+    height: 328.22px;
+    left: 52px;
+    top: 655.9px;
+    background-image: url('https://www.history.com/.image/t_share/MTU4MDk5NjA0Mjc1OTk2NDQx/africa.jpg');
+    border-radius: 8px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
+
 .myuserimg{
     background: url('https://www.personality-database.com/profile_images/121360.png?id=107143');
     background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
+    background-repeat: no-repeat;
+    background-position: center;
     width: 40px;
-    height: 45.86px;
-    left: 532px;
-    top: 1079.52px;
+    height: 40px;
     border-radius: 8px;
     
 }
@@ -106,40 +100,33 @@ background-position: center;
     padding-left:400px;
 }
 .counter1{
-width: 82px;
-height: 16px;
-left: 995px;
-top: 996.12px;
-
-font-family: Noto Sans;
-font-style: normal;
-font-weight: 500;
-font-size: 16px;
-line-height: 16px;
-letter-spacing: -0.035em;
-
-/* Gray 4 */
-
-color: #BDBDBD;
-}
-.counter2{
-
-    width: 72px;
+    width: 82px;
     height: 16px;
-    left: 1093px;
+    left: 995px;
     top: 996.12px;
-    
     font-family: Noto Sans;
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     line-height: 16px;
     letter-spacing: -0.035em;
-    
-    /* Gray 4 */
-    
     color: #BDBDBD;
 }
+
+.counter2{
+    width: 72px;
+    height: 16px;
+    left: 1093px;
+    top: 996.12px;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: -0.035em;
+    color: #BDBDBD;
+}
+
 .counter3{
     width: 55px;
     height: 16px;
@@ -149,22 +136,20 @@ color: #BDBDBD;
     font-size: 16px;
     line-height: 16px;
     letter-spacing: -0.035em;
-    
-    /* Gray 4 */
-    
     color: #BDBDBD;
 }
-.comment{
-width: 648.78px;
-height: 40px;
-left: 588.22px;
-top: 1079.52px;
 
-background: #FAFAFA;
-border: 1px solid #F2F2F2;
-box-sizing: border-box;
-border-radius: 8px;
+.comment{
+    width: 100%;
+    height: 40px;
+    background: #FAFAFA;
+    border: 1px solid #F2F2F2;
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin-left: 10px;
+    padding: 5px;
 }
+
 .tweet-container button{
  background-color: #FFFFFF;
  /* position: absolute; */

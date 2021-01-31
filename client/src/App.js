@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 import Bookmarks from './Components/Pages/Bookmarks';
-import Explore from './Components/Pages/Explore';
-import Home from './Components/Pages/HomePage/Home';
+import Home from './Components/Pages/Home/Home'
+import Explore from './Components/Pages/Explore/Explore';
 import Profile from './Components/Pages/Profile'
 import Tweetcard from './Components/SharedComponents/tweetcard';
 import Login from './Components/Pages/LoginSignup/Login';

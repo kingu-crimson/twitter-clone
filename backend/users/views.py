@@ -16,3 +16,5 @@ def details(request):
     myaccount = UserAccount.objects.get(id=request.data['id'])
     serializer = UserSerializered(myaccount, many=False)
     return Response(serializer.data)
+
+
