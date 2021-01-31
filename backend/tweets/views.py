@@ -4,7 +4,9 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from tweets.models import Tweet
+from users.models import UserAccount
 from tweets.serializers import TweetSerializer
+from users.serializers import UserSerializered
 # Create your views here.
 
 class TweetList(generics.ListCreateAPIView):
@@ -23,6 +25,23 @@ def bookmakrs(request):
     for v in request.data['user_bookmarks']:
         tweet = Tweet.objects.get(id=v['tweet_id'])
         bookmakrs.append(tweet)
-    # print(bookmakrs)
+    print(bookmakrs)
     serializer = TweetSerializer(bookmakrs, many=True)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def following(request):
+    following = []
+
+    for v in request.data['userTo']:
+        tweets = Tweet.objects.all().filter(user_id=v['user_to'])
+        tweets = tweets[::-1]
+        for v in tweets:
+            following.append(v)
+    
+    # print(following)
+    reversed_list = following[::-1]
+
+    serializer = TweetSerializer(reversed_list, many=True)
+    return Response(serializer.data)
+
