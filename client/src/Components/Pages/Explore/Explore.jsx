@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from "react-router-dom";
-import Tweet from './Tweet'
-import Tweets from './Tweets'
+import Tweets from '../Home/Tweets'
 
-import './Home.css'
-const Home = () => {
+import './Explore.css'
+const Explore = () => {
 
     const [tweets, setTweets] = useState(null)
     // console.log('changed', tweets)
@@ -29,7 +27,7 @@ const Home = () => {
     return (
         <div className='home'>
 
-            <Tweet setTweets={setTweets} tweets={tweets} />
+            {/* <Tweet setTweets={setTweets} tweets={tweets} /> */}
             <Tweets tweets={tweets} />
         </div>
     )
@@ -37,4 +35,4 @@ const Home = () => {
 
 
 
-export default Home
+export default Explore

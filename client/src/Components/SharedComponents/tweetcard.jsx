@@ -18,6 +18,7 @@ const Tweetcard = ({ tweet, user }) => {
     const [likes, setLikes] = useState([])
     const [bookmarks, setBookmarks] = useState([])
     const [comment, setComment] = useState('')
+    const [commentShow, setCommentShow] = useState(false)
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -123,19 +124,21 @@ const Tweetcard = ({ tweet, user }) => {
             </div>
             {/* <div className='line'></div> */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', marginTop: '15px' }}>
-                <button style={{ display: 'flex', alignItems: 'center' }}><AddCommentIcon style={comments.length ? { color: 'green' } : {}} />Comments</button>
+                <button style={{ display: 'flex', alignItems: 'center' }} onClick={() => setCommentShow(!commentShow)}><AddCommentIcon style={comments.length ? { color: 'green' } : {}} />Comments</button>
                 {/* <button className='retweet'><SyncRoundedIcon />Retweet</button> */}
                 <button onClick={postLike} style={{ display: 'flex', alignItems: 'center' }}><FavoriteBorderRoundedIcon style={likes.length ? { color: 'red' } : {}} />Likes</button>
                 <button onClick={addBookMark} style={{ display: 'flex', alignItems: 'center' }}><BookmarkBorderRoundedIcon style={bookmarks.length ? { color: 'Blue' } : {}} />Saved</button>
             </div>
 
             {/* <div className='line'></div> */}
-            <div className='myuserimg' style={{ marginTop: '10px', backgroundImage: `url(${user.image})` }}></div>
-            <form onSubmit={postComments} className='comment' style={{ marginTop: '15px' }}>
-                <input className='comment' placeholder='Tweet your reply' onChange={(e) => setComment(e.target.value)} value={comment}></input>
-            </form>
+            <div style={{ display: 'flex' }}>
+                <div className='myuserimg' style={{ marginTop: '10px', backgroundImage: `url(${user.image})` }}></div>
+                <form onSubmit={postComments} style={{ marginTop: '15px', width: '91%' }}>
+                    <input className='comment' placeholder='Tweet your reply' onChange={(e) => setComment(e.target.value)} value={comment}></input>
+                </form>
+            </div>
             {
-                comments && comments.map((comment, i) => <Comment key={i} comment={comment} />)
+                commentShow && comments && comments.map((comment, i) => <Comment key={i} comment={comment} />)
             }
 
         </div>

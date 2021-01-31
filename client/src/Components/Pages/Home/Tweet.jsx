@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useSnackbar } from 'notistack';
+import WallpaperIcon from '@material-ui/icons/Wallpaper';
 
 
 const Tweet = ({ user, tweets, setTweets }) => {
     const [content, setContent] = useState('')
+    const [image, setImage] = useState(null)
     const { enqueueSnackbar } = useSnackbar();
 
     const submitTweet = (e) => {
@@ -13,7 +15,7 @@ const Tweet = ({ user, tweets, setTweets }) => {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ content, user_id: user.id })
+                body: JSON.stringify({ content, user_id: user.id, image })
             }
             fetch('http://127.0.0.1:8000/tweet/', requestOptions)
                 .then(response => response.json())
@@ -28,6 +30,25 @@ const Tweet = ({ user, tweets, setTweets }) => {
         }
     }
 
+    const uploadImage = (e) => {
+        const formData = new FormData()
+        formData.append('file', e.target.files[0])
+        formData.append('upload_preset', 'pqcz20rh')
+
+        const requestOptions = {
+            method: 'POST',
+            body: formData
+        };
+        fetch('	https://api.cloudinary.com/v1_1/dzjchtsxn/image/upload', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                setImage(data.secure_url)
+
+            });
+
+    }
+
     return (
 
         <form className='tweet' onSubmit={submitTweet}>
@@ -35,8 +56,19 @@ const Tweet = ({ user, tweets, setTweets }) => {
             <div className='tweet__border'></div>
             <div className='tweet__pic' style={{ backgroundImage: `url(${user.image})` }}></div>
             <textarea className='tweet__input' placeholder='Write Something brooo ..' value={content} onChange={(e) => setContent(e.target.value)} />
+            <input
+                type="file"
+                id="file"
+                name="file"
+                // className='user_inputfile'
+                onChange={uploadImage}
+            />
+            <label className='label' for="file"><WallpaperIcon style={{ color: 'gray' }} /></label>
             <button className='tweet__buttom'
                 onClick={submitTweet}><p className='buttom__text'>Tweet</p></button>
+            {
+                image && <div className='tweet__image' style={{ backgroundImage: `url(${image})` }}></div>
+            }
         </form>
 
     )
