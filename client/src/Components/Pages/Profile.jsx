@@ -10,10 +10,10 @@ import './Profile.css'
 
 
 
-const Profile = ({ user, changeImage }) => {
+const Profile = ({ user, changeImage, userImage }) => {
     const [tweets, setTweets] = useState(null)
     const [profile, setProfile] = useState(null)
-    const [image, setImage] = useState(user.image)
+    const [image, setImage] = useState(userImage)
 
     useEffect(() => {
         getTweets()
@@ -67,7 +67,7 @@ const Profile = ({ user, changeImage }) => {
             .then(response => response.json())
             .then(data => {
                 console.log('succes', data)
-                window.location.reload()
+                // window.location.reload()
             })
     }
 
@@ -103,9 +103,10 @@ const Profile = ({ user, changeImage }) => {
     )
 }
 
-const mapStateToProps = ({ user: { user } }) => {
+const mapStateToProps = ({ user: { user, image } }) => {
     return {
-        user
+        user,
+        userImage: image
     }
 }
 

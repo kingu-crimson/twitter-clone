@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import './Header.css'
 
-const Header = ({ user }) => {
+const Header = ({ user, image }) => {
 
     const logOut = () => {
         localStorage.removeItem('access')
@@ -22,7 +22,7 @@ const Header = ({ user }) => {
                 <Link to='/Bookmarks' style={{ textDecoration: 'none' }}><p>Bookmarks</p></Link>
             </div>
             <div className='header__profile'>
-                <Link to='/profile'><Avatar alt="Remy Sharp" src={user.image} /></Link>
+                <Link to='/profile'><Avatar alt="Remy Sharp" src={image} /></Link>
                 <p>{user.name}</p>
                 <Button onClick={logOut} variant="contained" size='small' color='primary' style={{ marginLeft: '20px' }}>Log Out</Button>
             </div>
@@ -31,9 +31,10 @@ const Header = ({ user }) => {
 
 }
 
-const mapStateToProps = ({ user: { user } }) => {
+const mapStateToProps = ({ user: { user, image } }) => {
     return {
-        user
+        user,
+        image
     }
 }
 

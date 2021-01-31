@@ -4,7 +4,7 @@ import { useSnackbar } from 'notistack';
 import WallpaperIcon from '@material-ui/icons/Wallpaper';
 
 
-const Tweet = ({ user, tweets, setTweets }) => {
+const Tweet = ({ user, tweets, setTweets, userImage }) => {
     const [content, setContent] = useState('')
     const [image, setImage] = useState(null)
     const { enqueueSnackbar } = useSnackbar();
@@ -54,7 +54,7 @@ const Tweet = ({ user, tweets, setTweets }) => {
         <form className='tweet' onSubmit={submitTweet}>
             <p className='tweet__text'>Tweet Something</p>
             <div className='tweet__border'></div>
-            <div className='tweet__pic' style={{ backgroundImage: `url(${user.image})` }}></div>
+            <div className='tweet__pic' style={{ backgroundImage: `url(${userImage})` }}></div>
             <textarea className='tweet__input' placeholder='Write Something brooo ..' value={content} onChange={(e) => setContent(e.target.value)} />
             <input
                 type="file"
@@ -74,9 +74,10 @@ const Tweet = ({ user, tweets, setTweets }) => {
     )
 }
 
-const mapStateToProps = ({ user: { user } }) => {
+const mapStateToProps = ({ user: { user, image } }) => {
     return {
-        user
+        user,
+        userImage: image
     }
 }
 
