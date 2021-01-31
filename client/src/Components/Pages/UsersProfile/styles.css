@@ -3,37 +3,20 @@
     flex-direction: column;
     align-items: center;
 }
-.banner{
-    position: relative;
-    background-image: url('https://www.ottimitravel.com/wp-content/uploads/2019/02/cropped-banner-img.jpg');
-    background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
-    width: 100%;
-    height: 400px;
 
-
-}
-.container-info{
-    background-color: white;
-    box-shadow: initial;
-    width: 1600px;
-    left:200px;
-    height: 350px;
-    border-radius: 30px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-}
-.userimgprofile{
+.profile__follow{
+    top: 10%;
+    right: 5%;
+    padding: 7px 20px;
+    background: #2F80ED;
+    border: none;
+    border-radius: 4px;
     position: absolute;
-    background-image: url('https://i.ytimg.com/vi/Q6Au-x90AWU/maxresdefault.jpg');
-    background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
-    width:250px;
-    height: 250px;
-    top:390px;
-    left:200px;
-    border-radius: 30px;
+    color: #FFFFFF;
+    font-family: Noto Sans;
+    cursor: pointer;
+}
 
-} 
-
+.profile__follow:focus{
+    outline: none;
+}

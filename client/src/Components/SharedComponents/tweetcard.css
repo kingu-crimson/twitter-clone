@@ -32,9 +32,9 @@ background-position: center;
 }
 .username{
 position:absolute;
-width: 100px;
+/* width: 100px; */
 height: 48px;
-left: 70px;
+left: 90px;
 top: 4px;
 font-family: Poppins;
 font-style: normal;
@@ -212,3 +212,71 @@ border: 1px solid #F2F2F2;
 .comment:focus {
     outline:3px solid transparent;
 }
+
+.comments{
+    margin-top: 15px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.comments_img{
+    /* margin: 5px; */
+    width: 40px;
+    height: 40px;
+    background: url('https://www.personality-database.com/profile_images/121360.png?id=107143');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 4px;
+    
+}
+
+.comments_details{
+    margin-left: 10px;
+    width: 90%;
+    padding: 5px;
+    background: #FAFAFA;
+    border-radius: 8px;
+}
+
+.comments_details div p{
+    /* margin-top: 2px; */
+    margin-left: 20px;
+    margin-bottom: 4px;
+}
+
+.comments_name{
+    margin-top: 2px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 21px;
+    letter-spacing: -0.035em;
+    color: #000000;
+}
+
+.comments_date{
+    margin-top: 6px;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: -0.035em;
+    color: #BDBDBD;
+}
+
+.comments_details p{
+    margin-left: 10px;
+    text-align: start;
+    margin-top: 0px;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 22px;
+    letter-spacing: -0.035em;
+    color: #4F4F4F;
+}
+

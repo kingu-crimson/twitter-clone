@@ -11,21 +11,20 @@ export const load_user = () => async dispatch => {
                 'Authorization': `JWT ${localStorage.getItem('access')}`
             }
         }
-
-        try {
-            const res = await fetch(`http://127.0.0.1:8000/auth/users/me/`, requestOptions)
-            const data = await res.json()
-            // console.log(data)
+        const res = await fetch(`http://127.0.0.1:8000/auth/users/me/`, requestOptions)
+        const data = await res.json()
+        // console.log(data)
+        if (data.id) {
             dispatch({
                 type: UserActionTypes.USER_LOADED_SUCCESS,
                 payload: data
             })
-        } catch (err) {
-            // console.log(err)
+        } else {
             dispatch({
                 type: UserActionTypes.USER_LOADED_FAIL
             })
         }
+        // console.log(err)
     }
     else {
         dispatch({
