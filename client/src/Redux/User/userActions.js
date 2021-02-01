@@ -1,6 +1,20 @@
 import axios from 'axios';
 import { UserActionTypes } from './userTypes'
 
+const followUser = (id) => async dispatch => {
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_from: id, user_to: id })
+    }
+    fetch('http://127.0.0.1:8000/followers/', requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            // console.log('success', data)
+            // enqueueSnackbar('WELCOME BROO')
+        })
+}
+
 export const load_user = () => async dispatch => {
 
     if (localStorage.getItem('access')) {
@@ -65,6 +79,7 @@ export const register = (name, email, password, image) => async dispatch => {
     try {
         const res = await axios.post(`http://localhost:8000/auth/users/`, body, config)
         console.log(res)
+        dispatch(followUser(res.data.id))
         dispatch(login(email, password))
     } catch (err) {
         dispatch({

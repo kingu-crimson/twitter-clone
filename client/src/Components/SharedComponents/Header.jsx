@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Avatar, Button } from '@material-ui/core';
 import { connect } from 'react-redux'
-
+import HeaderList from './HeaderList'
 import './Header.css'
 
 const Header = ({ user }) => {
@@ -24,7 +24,7 @@ const Header = ({ user }) => {
             <div className='header__profile'>
                 <Link to='/profile'><Avatar alt="Remy Sharp" src={user.image} /></Link>
                 <p>{user.name}</p>
-                <Button onClick={logOut} variant="contained" size='small' color='primary' style={{ marginLeft: '20px' }}>Log Out</Button>
+                <HeaderList/>
             </div>
         </div>
     )

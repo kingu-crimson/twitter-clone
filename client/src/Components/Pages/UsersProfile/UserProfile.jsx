@@ -10,6 +10,8 @@ const UserProfile = ({ match, user }) => {
     const [profile, setProfile] = useState(null)
     const [followers, setFollowers] = useState([])
     const [follow, setFollow] = useState(true)
+    const [followId, setFollowId] = useState(null)
+    console.log('followid', followId)
     const id = match.params.id
 
     useEffect(() => {
@@ -21,6 +23,7 @@ const UserProfile = ({ match, user }) => {
         profile.userFrom.forEach((us) => {
             if (us.user_from === user.id) {
                 setFollow(false)
+                setFollowId(us.id)
             }
         })
     }
@@ -53,7 +56,23 @@ const UserProfile = ({ match, user }) => {
             .then(data => {
                 console.log(data)
                 setFollowers([...followers, data])
+                setFollowId(data.id)
                 setFollow(false)
+            })
+    }
+
+    const unFollowUser = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: followId })
+        }
+        fetch('http://127.0.0.1:8000/followers/remove', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                // setFollowers([...followers, data])
+                setFollow(true)
             })
     }
 
@@ -68,7 +87,11 @@ const UserProfile = ({ match, user }) => {
                         <p><span className='follow'><span style={{ marginRight: '7px', fontWeight: '600' }}>{followers.length}</span> Followers</span></p>
                     </div>
                 </div>
-                <button onClick={followUser} className='profile__follow'>{follow ? 'Follow' : 'Unfollow'}</button>
+                {
+                    follow ? <button onClick={followUser} className='profile__follow'>Follow</button> :
+                        <button onClick={unFollowUser} className='profile__follow'>Unfollow</button>
+                }
+
             </div>
             <div className='tweets'>
                 {

@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 
 import Bookmarks from './Components/Pages/Bookmarks';
-import Explore from './Components/Pages/Explore';
-import Home from './Components/Pages/HomePage/Home';
+import Home from './Components/Pages/Home/Home'
+import Explore from './Components/Pages/Explore/Explore';
 import Profile from './Components/Pages/Profile'
 import Tweetcard from './Components/SharedComponents/tweetcard';
 import Login from './Components/Pages/LoginSignup/Login';
@@ -33,6 +33,7 @@ const App = ({ isAuthenticated, load_user }) => {
         }
         <Switch>
           <Route path="/" exact render={(props) => !isAuthenticated ? <Login {...props} /> : <Redirect to='/home' />} />
+          <Route path="/test" exact component={Home}/>
           <Route path="/signup" exact render={(props) => !isAuthenticated ? <Signup {...props} /> : <Redirect to='/home' />} />
           <Route path="/home" exact render={(props) => isAuthenticated ? <Home {...props} /> : <Redirect to='/' />} />
           <Route path="/Profile" exact render={(props) => isAuthenticated ? <Profile {...props} /> : <Redirect to='/' />} />
