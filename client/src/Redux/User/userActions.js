@@ -1,6 +1,11 @@
 import axios from 'axios';
 import { UserActionTypes } from './userTypes'
 
+export const changeImage = (user) => ({
+    type: UserActionTypes.USER_IMAGE_CHANGE,
+    payload: user
+})
+
 const followUser = (id) => async dispatch => {
     const requestOptions = {
         method: 'POST',

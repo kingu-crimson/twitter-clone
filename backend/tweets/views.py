@@ -7,6 +7,8 @@ from tweets.models import Tweet
 from users.models import UserAccount
 from tweets.serializers import TweetSerializer
 from users.serializers import UserSerializered
+
+from datetime import datetime 
 # Create your views here.
 
 class TweetList(generics.ListCreateAPIView):
@@ -35,13 +37,9 @@ def following(request):
 
     for v in request.data['userTo']:
         tweets = Tweet.objects.all().filter(user_id=v['user_to'])
-        tweets = tweets[::-1]
         for v in tweets:
             following.append(v)
     
-    # print(following)
-    reversed_list = following[::-1]
-
-    serializer = TweetSerializer(reversed_list, many=True)
+    serializer = TweetSerializer(following, many=True)
     return Response(serializer.data)
 
