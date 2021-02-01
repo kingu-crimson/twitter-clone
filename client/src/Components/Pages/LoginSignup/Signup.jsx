@@ -18,7 +18,7 @@ const Signup = ({ register }) => {
 
 
     const { enqueueSnackbar } = useSnackbar();
-    var mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
+    var mediumRegex = new RegExp("^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
     const onChange = e => setData({ ...data, [e.target.name]: e.target.value });
 
