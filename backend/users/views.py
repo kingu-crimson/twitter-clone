@@ -26,4 +26,10 @@ def uploadImage(request):
     serializer = UserSerializered(myaccount, many=False)
     return Response(serializer.data)
 
+@api_view(['POST'])
+def search(request):
+    myaccount = UserAccount.objects.filter(name__icontains=request.data['name'])
+    serializer = UserSerializered(myaccount, many=True)
+    return Response(serializer.data)
+
 

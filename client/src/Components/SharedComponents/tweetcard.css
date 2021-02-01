@@ -173,11 +173,11 @@
     cursor: pointer;
 }
 
-.tweet__icons div:hover{
+/* .tweet__icons div:hover{
     background-color:#F2F2F2;
     /* transition: s; */
   
-}
+/* } */ */
 .line{
     /* position: absolute; */
 width: 705px;
