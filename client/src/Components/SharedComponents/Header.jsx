@@ -54,7 +54,7 @@ const Header = ({ user, image }) => {
             {
                 users && search && <div className='usersearch'>
                     {
-                        users.map((user, i) => <UserSearch key={i} user={user} />)
+                        users.map((user, i) => <UserSearch key={i} user={user} setSearch={setSearch} />)
                     }
                 </div>
             }
