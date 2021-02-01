@@ -29,11 +29,7 @@
     letter-spacing: -0.035em;
     /* Blue 1 */
     color: #2F80ED;
-<<<<<<< HEAD
-    height: 100%;
-=======
     text-decoration-line: none;
->>>>>>> e068dde35e26b36feb972511b15f97573538999f
 }
 
 .header__taps p:hover{
