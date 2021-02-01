@@ -6,7 +6,7 @@ import WallpaperIcon from '@material-ui/icons/Wallpaper';
 
 const Tweet = ({ user, tweets, setTweets, userImage }) => {
     const [content, setContent] = useState('')
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState('')
     const { enqueueSnackbar } = useSnackbar();
 
     const submitTweet = (e) => {
