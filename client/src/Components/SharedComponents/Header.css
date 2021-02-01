@@ -29,8 +29,21 @@
     letter-spacing: -0.035em;
     /* Blue 1 */
     color: #2F80ED;
+<<<<<<< HEAD
     height: 100%;
+=======
+    text-decoration-line: none;
+>>>>>>> e068dde35e26b36feb972511b15f97573538999f
 }
+
+.header__taps p:hover{
+    text-decoration-line: underline;
+    text-underline-offset: 30px;
+    text-decoration-thickness: 3px;
+}
+
+
+
 
 .header__profile{
     display: flex;
@@ -50,6 +63,7 @@
     margin-left: 20px;
 }
 
+
 .header_search{
     position: absolute;
     right: 16%;
@@ -68,23 +82,26 @@
 
 .usersearch{
     position: absolute;
-    right: 16%;
+    right: 14%;
     top: 100px;
     width: 15vw;
     /* max-height: 650px; */
-    background-color: white;
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
     border-radius: 15px;
     z-index: 2;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 22px;
+    
 }
 
 .searchedusers{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px;
-    background-color: #fdfdfd;
-    margin-bottom: 10px;
+    padding: 13px;
+    background-color: #F2F2F2;
+    margin-bottom: 15px;
     border-radius: 15px;
 
 }
