@@ -86,7 +86,7 @@ const Tweetcard = ({ tweet, user, userImage }) => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ tweet_id: tweet.id, user_id: user.id })
             }
-            fetch('http://127.0.0.1:8000/favourite/', requestOptions)
+            fetch('http://127.0.0.1:8000/favorite/', requestOptions)
                 .then(response => response.json())
                 .then(data => {
                     if (data.id) {

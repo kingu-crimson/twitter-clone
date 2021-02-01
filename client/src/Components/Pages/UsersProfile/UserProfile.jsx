@@ -15,6 +15,7 @@ const UserProfile = ({ match, user }) => {
     const id = match.params.id
 
     useEffect(() => {
+        // console.log(match.params)
         getTweets()
     }, [match.params.id])
 

@@ -17,6 +17,11 @@
 	position: absolute;
 	bottom: 15px;
 	left: 40px;
+	cursor: pointer;
+}
+.label :hover{
+	background-color:lightgray;
+	transition: 1s;
 }
 
 .tweet__image{
