@@ -80,7 +80,7 @@ const Profile = ({ user, changeImage, userImage }) => {
                     <div className='details__info'>
                         <p className='profile__name'>{profile && profile.name}</p>
                         <p><span className='follow'><span style={{ marginRight: '7px', fontWeight: '600' }}>{profile && profile.userTo.length - 1}</span> Following</span></p>
-                        <p><span className='follow'><span style={{ marginRight: '7px', fontWeight: '600' }}>{profile && profile.userFrom.length}</span> Followers</span></p>
+                        <p><span className='follow'><span style={{ marginRight: '7px', fontWeight: '600' }}>{profile && profile.userFrom.length - 1}</span> Followers</span></p>
                         <input
                             type="file"
                             id="file"
