@@ -51,11 +51,11 @@
 
 .header_search{
     position: absolute;
-    right: 14%;
+    right: 16%;
 }
 
 .header_input{
-    width: 220px;
+    width: 13vw;
     padding: 10px;
     border: gray 1px solid;
     border-radius: 15px;
@@ -67,9 +67,9 @@
 
 .usersearch{
     position: absolute;
-    right: 14%;
+    right: 16%;
     top: 100px;
-    width: 240px;
+    width: 15vw;
     /* max-height: 650px; */
     background-color: white;
     border-radius: 15px;
