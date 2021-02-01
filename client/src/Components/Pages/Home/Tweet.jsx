@@ -4,9 +4,9 @@ import { useSnackbar } from 'notistack';
 import WallpaperIcon from '@material-ui/icons/Wallpaper';
 
 
-const Tweet = ({ user, tweets, setTweets }) => {
+const Tweet = ({ user, tweets, setTweets, userImage }) => {
     const [content, setContent] = useState('')
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState('')
     const { enqueueSnackbar } = useSnackbar();
 
     const submitTweet = (e) => {
@@ -54,7 +54,7 @@ const Tweet = ({ user, tweets, setTweets }) => {
         <form className='tweet' onSubmit={submitTweet}>
             <p className='tweet__text'>Tweet Something</p>
             <div className='tweet__border'></div>
-            <div className='tweet__pic' style={{ backgroundImage: `url(${user.image})` }}></div>
+            <div className='tweet__pic' style={{ backgroundImage: `url(${userImage})` }}></div>
             <textarea className='tweet__input' placeholder='Write Something brooo ..' value={content} onChange={(e) => setContent(e.target.value)} />
             <input
                 type="file"
@@ -63,7 +63,7 @@ const Tweet = ({ user, tweets, setTweets }) => {
                 // className='user_inputfile'
                 onChange={uploadImage}
             />
-            <label className='label' for="file"><WallpaperIcon style={{ color: 'gray' }} /></label>
+            <label className='label' htmlFor="file"><WallpaperIcon style={{ color: 'gray' }} /></label>
             <button className='tweet__buttom'
                 onClick={submitTweet}><p className='buttom__text'>Tweet</p></button>
             {
@@ -74,9 +74,10 @@ const Tweet = ({ user, tweets, setTweets }) => {
     )
 }
 
-const mapStateToProps = ({ user: { user } }) => {
+const mapStateToProps = ({ user: { user, image } }) => {
     return {
-        user
+        user,
+        userImage: image
     }
 }
 

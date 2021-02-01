@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Avatar, Button } from '@material-ui/core';
 import { connect } from 'react-redux'
-import HeaderList from './HeaderList'
+
+import UserSearch from './UserSearch'
+
 import './Header.css'
 
-const Header = ({ user }) => {
+const Header = ({ user, image }) => {
+    const [search, setSearch] = useState('')
+    const [users, setUsers] = useState([])
+
+
+    const handleSearch = (e) => {
+        setSearch(e.target.value)
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: search })
+        }
+        fetch('http://localhost:8000/user/search', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log('succes', data)
+                // window.location.reload()
+                setUsers(data)
+            })
+    }
+
 
     const logOut = () => {
         localStorage.removeItem('access')
@@ -22,18 +44,31 @@ const Header = ({ user }) => {
                 <Link to='/Bookmarks' style={{ textDecoration: 'none' }}><p>Bookmarks</p></Link>
             </div>
             <div className='header__profile'>
-                <Link to='/profile'><Avatar alt="Remy Sharp" src={user.image} /></Link>
+                <Link to='/profile'><Avatar alt="Remy Sharp" src={image} /></Link>
                 <p>{user.name}</p>
-                <HeaderList/>
+                <Button onClick={logOut} variant="contained" size='small' color='primary' style={{ marginLeft: '20px' }}>Log Out</Button>
+                <form className='header_search'>
+                    <input className='header_input' placeholder='Search for a user ..' type='text' value={search} onChange={handleSearch} />
+                </form>
             </div>
+            {
+                users && search && <div className='usersearch'>
+                    {
+                        users.map((user, i) => <UserSearch key={i} user={user} setSearch={setSearch} />)
+                    }
+                </div>
+            }
+
+
         </div>
     )
 
 }
 
-const mapStateToProps = ({ user: { user } }) => {
+const mapStateToProps = ({ user: { user, image } }) => {
     return {
-        user
+        user,
+        image
     }
 }
 
