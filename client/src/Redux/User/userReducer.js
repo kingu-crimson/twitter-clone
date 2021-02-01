@@ -4,7 +4,8 @@ const initialState = {
     access: localStorage.getItem('access'),
     refresh: localStorage.getItem('refresh'),
     isAuthenticated: null,
-    user: null
+    user: null,
+    image: ''
 };
 const userReducer = function (state = initialState, action) {
     const { type, payload } = action
@@ -22,7 +23,8 @@ const userReducer = function (state = initialState, action) {
             return {
                 ...state,
                 isAuthenticated: true,
-                user: payload
+                user: payload,
+                image: payload.image
             }
         case UserActionTypes.USER_LOADED_FAIL:
             // localStorage.removeItem('access')
@@ -41,6 +43,11 @@ const userReducer = function (state = initialState, action) {
                 refresh: null,
                 isAuthenticated: false,
                 user: null,
+            }
+        case UserActionTypes.USER_IMAGE_CHANGE:
+            return {
+                ...state,
+                image: payload.image
             }
         default:
             return state

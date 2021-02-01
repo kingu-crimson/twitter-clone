@@ -75,15 +75,14 @@
 }
 
 .postimg{
-    width: 650px;
-    height: 328.22px;
-    left: 52px;
-    top: 655.9px;
-    background-image: url('https://www.history.com/.image/t_share/MTU4MDk5NjA0Mjc1OTk2NDQx/africa.jpg');
+    /* position: absolute; */
+    width: 100%;
+    object-fit: contain;
+    /* background-image: url('https://www.history.com/.image/t_share/MTU4MDk5NjA0Mjc1OTk2NDQx/africa.jpg'); */
     border-radius: 8px;
-    background-size: cover;
+    /* background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center; */
 }
 
 .myuserimg{
@@ -150,35 +149,35 @@
     padding: 5px;
 }
 
-.tweet-container button{
- background-color: #FFFFFF;
- /* position: absolute; */
- width: 150px;
- /* height: 19px; */
- /* left: 595.13px; */
- /* top: 1035.03px; */
- 
- font-family: Noto Sans;
- font-style: normal;
- font-weight: 500;
- font-size: 14px;
- line-height: 19px;
- /* identical to box height */
- 
- letter-spacing: -0.035em;
- 
- /* Gray 2 */
- 
- color: #4F4F4F;
- padding: 0;
- border: none;
- background: none;
+.tweet__icons{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 15px;
 }
-.tweet-container button:hover{
+/* display: 'flex', alignItems: 'center' */
+.tweet__icons div{
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: -0.035em;
+    color: #4F4F4F;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* .tweet__icons div:hover{
     background-color:#F2F2F2;
     /* transition: s; */
   
-}
+/* } */ */
 .line{
     /* position: absolute; */
 width: 705px;
@@ -226,7 +225,7 @@ border: 1px solid #F2F2F2;
 
 .comments_details div p{
     /* margin-top: 2px; */
-    margin-left: 20px;
+    margin-left: 10px;
     margin-bottom: 4px;
 }
 
@@ -234,15 +233,15 @@ border: 1px solid #F2F2F2;
     margin-top: 2px;
     font-family: Poppins;
     font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
+    font-weight: 700;
+    font-size: 14px;
     line-height: 21px;
     letter-spacing: -0.035em;
     color: #000000;
 }
 
 .comments_date{
-    margin-top: 6px;
+    margin-top: 3px;
     font-family: Noto Sans;
     font-style: normal;
     font-weight: 500;
@@ -252,7 +251,7 @@ border: 1px solid #F2F2F2;
     color: #BDBDBD;
 }
 
-.comments_details p{
+.comments__content{
     margin-left: 10px;
     text-align: start;
     margin-top: 0px;

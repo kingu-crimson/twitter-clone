@@ -13,7 +13,7 @@ import BookmarkBorderRoundedIcon from '@material-ui/icons/BookmarkBorderRounded'
 import Comment from './Comment'
 
 
-const Tweetcard = ({ tweet, user }) => {
+const Tweetcard = ({ tweet, user, userImage }) => {
     const [comments, setComments] = useState([])
     const [likes, setLikes] = useState([])
     const [bookmarks, setBookmarks] = useState([])
@@ -108,31 +108,30 @@ const Tweetcard = ({ tweet, user }) => {
         <div className='tweet-container'>
             <Link to={user.id === tweet.user_id ? `/profile` : `/profile/${tweet.user_id}`}>
                 <div className='user'>
-                    <div className='userimg' style={{ backgroundImage: `url(${tweet.userImage})` }}></div>
+                    <div className='userimg' style={{ backgroundImage: `url(${user.id === tweet.user_id ? userImage : tweet.userImage})` }}></div>
                     <h3 className='username'>{tweet.user}</h3>
                     <small className='date'>{tweet.created_at.split('T')[0]}</small>
                 </div>
             </Link>
             <h3 className='content'>{tweet.content}   </h3>
             {
-                tweet.image.length > 0 && <div className='postimg' style={{ backgroundImage: `url(${tweet.image})` }}></div>
+                tweet.image.length > 0 && <img className='postimg' src={tweet.image} alt='tweet img' />
             }
             <div className='counters' style={{ marginTop: '15px' }}>
                 <small className='counter1' style={{ marginRight: '22px' }}>{comments.length} comments</small>
                 <small className='counter2' style={{ marginRight: '22px' }}>{bookmarks.length} Saved</small>
                 <small className='counter3'>{likes.length} Likes</small>
             </div>
-            {/* <div className='line'></div> */}
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', marginTop: '15px' }}>
-                <button style={{ display: 'flex', alignItems: 'center' }} onClick={() => setCommentShow(!commentShow)}><AddCommentIcon style={comments.length ? { color: 'green' } : {}} />Comments</button>
-                {/* <button className='retweet'><SyncRoundedIcon />Retweet</button> */}
-                <button onClick={postLike} style={{ display: 'flex', alignItems: 'center' }}><FavoriteBorderRoundedIcon style={likes.length ? { color: 'red' } : {}} />Likes</button>
-                <button onClick={addBookMark} style={{ display: 'flex', alignItems: 'center' }}><BookmarkBorderRoundedIcon style={bookmarks.length ? { color: 'Blue' } : {}} />Saved</button>
+
+            <div className='tweet__icons' >
+                <div onClick={() => setCommentShow(!commentShow)}><AddCommentIcon style={comments.length ? { color: 'green', marginRight: '7px' } : { marginRight: '7px' }} /><p>Comments</p></div>
+                <div onClick={postLike} ><FavoriteBorderRoundedIcon style={likes.length ? { color: 'red', marginRight: '7px' } : { marginRight: '7px' }} /><p>Likes</p></div>
+                <div onClick={addBookMark} ><BookmarkBorderRoundedIcon style={bookmarks.length ? { color: 'Blue', marginRight: '7px' } : { marginRight: '7px' }} /><p>Saved</p></div>
             </div>
 
-            {/* <div className='line'></div> */}
+
             <div style={{ display: 'flex' }}>
-                <div className='myuserimg' style={{ marginTop: '10px', backgroundImage: `url(${user.image})` }}></div>
+                <div className='myuserimg' style={{ marginTop: '10px', backgroundImage: `url(${userImage})` }}></div>
                 <form onSubmit={postComments} style={{ marginTop: '15px', width: '91%' }}>
                     <input className='comment' placeholder='Tweet your reply' onChange={(e) => setComment(e.target.value)} value={comment}></input>
                 </form>
@@ -147,9 +146,10 @@ const Tweetcard = ({ tweet, user }) => {
 
 }
 
-const mapStateToProps = ({ user: { user } }) => {
+const mapStateToProps = ({ user: { user, image } }) => {
     return {
-        user
+        user,
+        userImage: image
     }
 }
 
