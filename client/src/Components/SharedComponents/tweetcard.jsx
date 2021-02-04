@@ -83,7 +83,7 @@ const Tweetcard = ({ tweet, user, userImage }) => {
         fetch('http://127.0.0.1:8000/like/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log('likedata', data)
+                // console.log('likedata', data)
                 setLikes(likes + 1)
                 setLiked(true)
                 setLikeId(data.id)
@@ -99,7 +99,7 @@ const Tweetcard = ({ tweet, user, userImage }) => {
         fetch('http://127.0.0.1:8000/like/remove', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 let count = likes - 1
                 setLikes(count)
                 setLiked(false)

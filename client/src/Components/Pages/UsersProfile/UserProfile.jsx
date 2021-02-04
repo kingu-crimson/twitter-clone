@@ -9,6 +9,7 @@ const UserProfile = ({ match, user }) => {
     const [tweets, setTweets] = useState(null)
     const [profile, setProfile] = useState(null)
     const [followers, setFollowers] = useState([])
+    const [followersCount, setFollowersCount] = useState(0)
     const [follow, setFollow] = useState(true)
     const [followId, setFollowId] = useState(null)
     // console.log('followid', followId)
@@ -40,6 +41,7 @@ const UserProfile = ({ match, user }) => {
                 setProfile(data)
                 setTweets(data.tweets)
                 setFollowers(data.userFrom)
+                setFollowersCount(data.userFrom.length)
                 checkFollow(data)
             })
     }
@@ -53,8 +55,9 @@ const UserProfile = ({ match, user }) => {
         fetch('http://127.0.0.1:8000/followers/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setFollowers([...followers, data])
+                setFollowersCount(followersCount + 1)
                 setFollowId(data.id)
                 setFollow(false)
             })
@@ -69,8 +72,8 @@ const UserProfile = ({ match, user }) => {
         fetch('http://127.0.0.1:8000/followers/remove', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-                // setFollowers([...followers, data])
+                // console.log(data)
+                setFollowersCount(followersCount - 1)
                 setFollow(true)
             })
     }
@@ -83,7 +86,7 @@ const UserProfile = ({ match, user }) => {
                     <div className='details__info'>
                         <p className='profile__name'>{profile && profile.name}</p>
                         <p><span className='follow'><span style={{ marginRight: '7px', fontWeight: '600' }}>{profile && profile.userTo.length - 1}</span> Following</span></p>
-                        <p><span className='follow'><span style={{ marginRight: '7px', fontWeight: '600' }}>{followers.length - 1}</span> Followers</span></p>
+                        <p><span className='follow'><span style={{ marginRight: '7px', fontWeight: '600' }}>{followersCount - 1}</span> Followers</span></p>
                     </div>
                 </div>
                 {
