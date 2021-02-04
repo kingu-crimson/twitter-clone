@@ -26,3 +26,32 @@
 	bottom: 15px;
 	left: 90px;
 }
+
+.explore__search{
+	width: 42%;
+	margin-top: 30px;
+	position: relative;
+}
+
+.search__input{
+	width: 100%;
+	background-color: #FFFFFF;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+	border: none;
+	border-radius: 8px;
+	padding: 20px;
+	font-family: Noto Sans;
+	font-size: 16px;
+}
+
+.search__input:focus{
+	outline: none;
+}
+
+.search__icon{
+	position: absolute;
+	right: 20px;
+	top: 18px;
+	color: gray;
+	cursor: pointer;
+}
