@@ -28,7 +28,7 @@ const Profile = ({ user, changeImage, userImage }) => {
         fetch('http://127.0.0.1:8000/user/details', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setProfile(data)
                 setTweets(data.tweets)
             })

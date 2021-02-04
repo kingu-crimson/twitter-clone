@@ -9,7 +9,7 @@ import './Home.css'
 const Explore = ({ user }) => {
     const [tweets, setTweets] = useState(null)
     const [following, setFollowing] = useState([])
-    console.log('following t', following)
+    // console.log('following t', following)
     useEffect(() => {
         getTweets()
     }, [])
@@ -23,7 +23,7 @@ const Explore = ({ user }) => {
         fetch('http://127.0.0.1:8000/user/details', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setTweets(data.tweets)
                 getFollowing({ userTo: data.userTo, id: user.id })
             })
@@ -38,7 +38,7 @@ const Explore = ({ user }) => {
         fetch('http://127.0.0.1:8000/tweet/following', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log('Following', data)
+                // console.log('Following', data)
 
                 data.sort(function (a, b) {
 

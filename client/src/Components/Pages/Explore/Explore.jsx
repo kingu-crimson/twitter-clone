@@ -11,6 +11,8 @@ const Explore = () => {
         getTweets()
     }, [])
 
+
+
     const getTweets = () => {
         const requestOptions = {
             method: 'GET',
@@ -19,15 +21,13 @@ const Explore = () => {
         fetch('http://127.0.0.1:8000/tweet/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setTweets(data)
             })
     }
 
     return (
-        <div className='home'>
-
-            {/* <Tweet setTweets={setTweets} tweets={tweets} /> */}
+        <div className='explore'>
             <Tweets tweets={tweets} />
         </div>
     )

@@ -40,7 +40,7 @@ const Bookmarks = ({ user }) => {
             .then(response => response.json())
             .then(data => {
                 // window.location.reload()
-                console.log('bookmarks', data)
+                // console.log('bookmarks', data)
                 setBookmarks(data)
 
             })

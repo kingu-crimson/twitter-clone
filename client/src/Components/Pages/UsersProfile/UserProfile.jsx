@@ -11,7 +11,7 @@ const UserProfile = ({ match, user }) => {
     const [followers, setFollowers] = useState([])
     const [follow, setFollow] = useState(true)
     const [followId, setFollowId] = useState(null)
-    console.log('followid', followId)
+    // console.log('followid', followId)
     const id = match.params.id
 
     useEffect(() => {
@@ -36,7 +36,7 @@ const UserProfile = ({ match, user }) => {
         fetch('http://127.0.0.1:8000/user/details', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setProfile(data)
                 setTweets(data.tweets)
                 setFollowers(data.userFrom)

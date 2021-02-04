@@ -12,7 +12,7 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     margin: 10px 5px;
     padding: 16px;
-    max-width: 735px;
+    width: 40%;
     background-color: white;
   
 }
@@ -23,8 +23,6 @@
     border-radius: 8px;
     width: 71.16px;
     height: 76.74px;
-    left: 512px;
-    top: 532.9px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -96,9 +94,23 @@
     
 }
 .counters{
-    padding-left:400px;
+    margin-right:20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
-.counter1{
+
+.counters small{
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: -0.035em;
+    color: #BDBDBD;
+}
+
+/* .counter1{
     width: 82px;
     height: 16px;
     left: 995px;
@@ -136,7 +148,7 @@
     line-height: 16px;
     letter-spacing: -0.035em;
     color: #BDBDBD;
-}
+} */
 
 .comment{
     width: 100%;
@@ -264,3 +276,11 @@ border: 1px solid #F2F2F2;
     color: #4F4F4F;
 }
 
+@media only screen and (max-width: 900px) {
+   
+    .tweet-container{
+        width: 90%;
+    }
+
+
+  }
