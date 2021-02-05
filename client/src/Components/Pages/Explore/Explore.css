@@ -85,3 +85,19 @@
 	color: blue;
 }
 
+@media only screen and (max-width: 900px) {
+
+	.explore__search{
+		width: 85%;
+	}
+   
+    .explore__filters{
+		position: static;
+		width: 100%;
+		padding: 10px;
+		margin-top: 40px;
+	}
+    
+
+  }
+
