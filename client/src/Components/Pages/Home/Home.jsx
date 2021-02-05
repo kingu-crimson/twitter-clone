@@ -8,7 +8,7 @@ import Tweet from './Tweet'
 import './Home.css'
 
 const Explore = ({ user }) => {
-    const [tweets, setTweets] = useState(null)
+    // const [tweets, setTweets] = useState(null)
     const [following, setFollowing] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -26,7 +26,7 @@ const Explore = ({ user }) => {
             .then(response => response.json())
             .then(data => {
                 // console.log(data)
-                setTweets(data.tweets)
+                // setTweets(data.tweets)
                 getFollowing({ userTo: data.userTo, id: user.id })
             })
     }

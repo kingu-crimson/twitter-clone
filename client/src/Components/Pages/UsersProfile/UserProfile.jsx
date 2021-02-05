@@ -5,7 +5,7 @@ import TweetCard from '../../SharedComponents/tweetcard'
 
 import './styles.css'
 
-const UserProfile = ({ match, user }) => {
+const UserProfile = ({ match, user, history }) => {
     const [tweets, setTweets] = useState(null)
     const [profile, setProfile] = useState(null)
     const [followers, setFollowers] = useState([])
@@ -16,8 +16,11 @@ const UserProfile = ({ match, user }) => {
     const id = match.params.id
 
     useEffect(() => {
-        // console.log(match.params)
-        getTweets()
+        if (user.id == match.params.id) {
+            history.push('/profile')
+        } else {
+            getTweets()
+        }
     }, [match.params.id])
 
     const checkFollow = (profile) => {

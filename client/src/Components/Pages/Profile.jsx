@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Link } from "react-router-dom";
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 
 import { changeImage } from '../../Redux/User/userActions'
@@ -13,7 +12,6 @@ import './Profile.css'
 const Profile = ({ user, changeImage, userImage }) => {
     const [tweets, setTweets] = useState(null)
     const [profile, setProfile] = useState(null)
-    const [image, setImage] = useState(userImage)
 
     useEffect(() => {
         getTweets()

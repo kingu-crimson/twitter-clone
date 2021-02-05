@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { useSnackbar } from 'notistack';
 
 import AddCommentIcon from '@material-ui/icons/AddComment';
-import SyncRoundedIcon from '@material-ui/icons/SyncRounded';
+// import SyncRoundedIcon from '@material-ui/icons/SyncRounded';
 import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
 import BookmarkBorderRoundedIcon from '@material-ui/icons/BookmarkBorderRounded';
 
