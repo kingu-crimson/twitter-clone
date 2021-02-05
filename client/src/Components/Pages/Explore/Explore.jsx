@@ -1,15 +1,37 @@
 import React, { useState, useEffect } from 'react'
+import SearchIcon from '@material-ui/icons/Search';
+import Loader from 'react-loader-spinner';
+
 import Tweets from '../Home/Tweets'
 
 import './Explore.css'
+
 const Explore = () => {
 
     const [tweets, setTweets] = useState(null)
-    // console.log('changed', tweets)
+    const [input, setInput] = useState('')
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         getTweets()
     }, [])
+
+
+    const searchTweets = () => {
+        setLoading(true)
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: input })
+        }
+        fetch('http://127.0.0.1:8000/tweet/search', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                // console.log('succes', data)
+                setTweets(data)
+                setLoading(false)
+            })
+    }
 
     const getTweets = () => {
         const requestOptions = {
@@ -19,16 +41,40 @@ const Explore = () => {
         fetch('http://127.0.0.1:8000/tweet/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setTweets(data)
+                setLoading(false)
             })
     }
 
-    return (
-        <div className='home'>
+    const filterByLikes = () => {
+        let sortedTweets = [...tweets]
+        sortedTweets.sort((a, b) => b.tweet_likes.length - a.tweet_likes.length)
+        setTweets(sortedTweets)
+    }
 
-            {/* <Tweet setTweets={setTweets} tweets={tweets} /> */}
-            <Tweets tweets={tweets} />
+    const filterByLatest = () => {
+        let Latest = [...tweets]
+        Latest.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        setTweets(Latest)
+    }
+
+    return (
+        <div className='explore'>
+            <form className='explore__search'>
+                <input className='search__input' type='text' placeholder='Search tweets ..' value={input} onChange={(e) => setInput(e.target.value)} />
+                <SearchIcon className='search__icon' onClick={searchTweets} />
+                <div className='explore__filters'>
+                    <p onClick={filterByLatest}>Latest</p>
+                    <p onClick={filterByLikes}>Top</p>
+                </div>
+            </form>
+
+            {
+                loading ?
+                    <Loader type="Circles" color="#00BFFF" height={80} width={80} style={{ marginTop: '300px' }} /> :
+                    <Tweets tweets={tweets} />
+            }
         </div>
     )
 }
