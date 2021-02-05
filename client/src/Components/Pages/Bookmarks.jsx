@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Link } from "react-router-dom";
 
 import TweetCard from '../SharedComponents/tweetcard'
 
@@ -8,7 +7,7 @@ import './Bookmarks.css'
 
 const Bookmarks = ({ user }) => {
 
-    const [tweets, setTweets] = useState(null)
+    // const [tweets, setTweets] = useState(null)
     const [bookmarks, setBookmarks] = useState(null)
 
     useEffect(() => {
@@ -25,7 +24,7 @@ const Bookmarks = ({ user }) => {
             .then(response => response.json())
             .then(data => {
                 // console.log(data)
-                setTweets(data.tweets)
+                // setTweets(data.tweets)
                 getBookmarks({ user_bookmarks: data.user_bookmarks })
             })
     }

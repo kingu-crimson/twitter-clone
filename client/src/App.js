@@ -6,7 +6,7 @@ import Bookmarks from './Components/Pages/Bookmarks';
 import Home from './Components/Pages/Home/Home'
 import Explore from './Components/Pages/Explore/Explore';
 import Profile from './Components/Pages/Profile'
-import Tweetcard from './Components/SharedComponents/tweetcard';
+// import Tweetcard from './Components/SharedComponents/tweetcard';
 import Login from './Components/Pages/LoginSignup/Login';
 import Signup from './Components/Pages/LoginSignup/Signup';
 import Header from './Components/SharedComponents/Header'
@@ -20,7 +20,7 @@ const App = ({ isAuthenticated, load_user }) => {
   // console.log(isAuthenticated)
 
   useEffect(() => {
-    console.log('sss')
+    // console.log('sss')
     load_user()
   }, [])
 
@@ -33,7 +33,7 @@ const App = ({ isAuthenticated, load_user }) => {
         }
         <Switch>
           <Route path="/" exact render={(props) => !isAuthenticated ? <Login {...props} /> : <Redirect to='/home' />} />
-          <Route path="/test" exact component={Home}/>
+          <Route path="/test" exact component={Home} />
           <Route path="/signup" exact render={(props) => !isAuthenticated ? <Signup {...props} /> : <Redirect to='/home' />} />
           <Route path="/home" exact render={(props) => isAuthenticated ? <Home {...props} /> : <Redirect to='/' />} />
           <Route path="/Profile" exact render={(props) => isAuthenticated ? <Profile {...props} /> : <Redirect to='/' />} />
