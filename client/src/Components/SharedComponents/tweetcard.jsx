@@ -15,16 +15,30 @@ import Comment from './Comment'
 
 const Tweetcard = ({ tweet, user, userImage }) => {
     const [comments, setComments] = useState([])
-    const [likes, setLikes] = useState([])
+    const [likes, setLikes] = useState(0)
     const [bookmarks, setBookmarks] = useState([])
     const [comment, setComment] = useState('')
     const [commentShow, setCommentShow] = useState(false)
+    const [like, setLiked] = useState(false)
+    const [likeId, setLikeId] = useState(null)
 
+    // console.log(tweet.content, like)
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         getComments()
+        checkLikes()
     }, [])
+
+    const checkLikes = () => {
+        tweet.tweet_likes.forEach((like) => {
+            if (like.user_id === user.id) {
+                setLiked(true)
+                setLikeId(like.id)
+            }
+        })
+    }
+
 
     const getComments = () => {
         const requestOptions = {
@@ -37,7 +51,7 @@ const Tweetcard = ({ tweet, user, userImage }) => {
             .then(data => {
                 // console.log(data)
                 setComments(data.comments)
-                setLikes(data.tweet_likes)
+                setLikes(data.tweet_likes.length)
                 setBookmarks(data.tweet_bookmarks)
             })
     }
@@ -69,13 +83,27 @@ const Tweetcard = ({ tweet, user, userImage }) => {
         fetch('http://127.0.0.1:8000/like/', requestOptions)
             .then(response => response.json())
             .then(data => {
-                if (data.id) {
-                    setLikes([...likes, data])
-                } else {
-                    throw Error
-                }
+                // console.log('likedata', data)
+                setLikes(likes + 1)
+                setLiked(true)
+                setLikeId(data.id)
+            })
+    }
 
-            }).catch(() => enqueueSnackbar('You can only like once', { variant: 'error', autoHideDuration: 1500 }))
+    const removeLike = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: likeId })
+        }
+        fetch('http://127.0.0.1:8000/like/remove', requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data)
+                let count = likes - 1
+                setLikes(count)
+                setLiked(false)
+            })
     }
 
     const addBookMark = (e) => {
@@ -120,13 +148,16 @@ const Tweetcard = ({ tweet, user, userImage }) => {
             <div className='counters' style={{ marginTop: '15px' }}>
                 <small className='counter1' style={{ marginRight: '22px' }}>{comments.length} comments</small>
                 <small className='counter2' style={{ marginRight: '22px' }}>{bookmarks.length} Saved</small>
-                <small className='counter3'>{likes.length} Likes</small>
+                <small className='counter3'>{likes} Likes</small>
             </div>
 
             <div className='tweet__icons' >
                 <div onClick={() => setCommentShow(!commentShow)}><AddCommentIcon style={comments.length ? { color: 'green', marginRight: '7px' } : { marginRight: '7px' }} /><p>Comments</p></div>
-                <div onClick={postLike} ><FavoriteBorderRoundedIcon style={likes.length ? { color: 'red', marginRight: '7px' } : { marginRight: '7px' }} /><p>Likes</p></div>
-                <div onClick={addBookMark} ><BookmarkBorderRoundedIcon style={bookmarks.length ? { color: 'Blue', marginRight: '7px' } : { marginRight: '7px' }} /><p>Saved</p></div>
+                {
+                    like ? <div onClick={removeLike} ><FavoriteBorderRoundedIcon style={likes ? { color: 'red', marginRight: '7px' } : { marginRight: '7px' }} /><p>UnLike</p></div> :
+                        <div onClick={postLike} ><FavoriteBorderRoundedIcon style={likes ? { color: 'red', marginRight: '7px' } : { marginRight: '7px' }} /><p>Like</p></div>
+                }
+                <div onClick={addBookMark} ><BookmarkBorderRoundedIcon style={bookmarks.length ? { color: 'Blue', marginRight: '7px' } : { marginRight: '7px' }} /><p>Save</p></div>
             </div>
 
 

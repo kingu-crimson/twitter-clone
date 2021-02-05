@@ -22,7 +22,7 @@ const Header = ({ user, image }) => {
         fetch('http://localhost:8000/user/search', requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log('succes', data)
+                // console.log('succes', data)
                 // window.location.reload()
                 setUsers(data)
             })

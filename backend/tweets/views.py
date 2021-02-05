@@ -43,3 +43,9 @@ def following(request):
     serializer = TweetSerializer(following, many=True)
     return Response(serializer.data)
 
+@api_view(['POST'])
+def search(request):
+    tweets = Tweet.objects.filter(content__icontains=request.data['content'])
+    serializer = TweetSerializer(tweets, many=True)
+    return Response(serializer.data)
+
