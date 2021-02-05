@@ -33,6 +33,7 @@ const App = ({ isAuthenticated, load_user }) => {
         }
         <Switch>
           <Route path="/" exact render={(props) => !isAuthenticated ? <Login {...props} /> : <Redirect to='/home' />} />
+          <Route path="/test" exact component={Home}/>
           <Route path="/signup" exact render={(props) => !isAuthenticated ? <Signup {...props} /> : <Redirect to='/home' />} />
           <Route path="/home" exact render={(props) => isAuthenticated ? <Home {...props} /> : <Redirect to='/' />} />
           <Route path="/Profile" exact render={(props) => isAuthenticated ? <Profile {...props} /> : <Redirect to='/' />} />
