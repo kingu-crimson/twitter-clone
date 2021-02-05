@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import Loader from 'react-loader-spinner';
 
 import Tweets from './Tweets'
 import Tweet from './Tweet'
@@ -9,7 +10,8 @@ import './Home.css'
 const Explore = ({ user }) => {
     const [tweets, setTweets] = useState(null)
     const [following, setFollowing] = useState([])
-    // console.log('following t', following)
+    const [loading, setLoading] = useState(true)
+
     useEffect(() => {
         getTweets()
     }, [])
@@ -44,6 +46,7 @@ const Explore = ({ user }) => {
 
                     return new Date(b.created_at) - new Date(a.created_at);
                 })
+                setLoading(false)
                 setFollowing(data)
 
             })
@@ -54,7 +57,12 @@ const Explore = ({ user }) => {
     return (
         <div className='home'>
             <Tweet setTweets={setFollowing} tweets={following} />
-            <Tweets tweets={following} />
+            {
+                loading ?
+                    <Loader type="Circles" color="#00BFFF" height={80} width={80} style={{ marginTop: '300px' }} /> :
+                    <Tweets tweets={following} />
+            }
+
         </div>
     )
 }
