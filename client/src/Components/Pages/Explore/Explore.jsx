@@ -17,7 +17,8 @@ const Explore = () => {
     }, [])
 
 
-    const searchTweets = () => {
+    const searchTweets = (e) => {
+        e.preventDefault()
         setLoading(true)
         const requestOptions = {
             method: 'POST',
@@ -61,7 +62,7 @@ const Explore = () => {
 
     return (
         <div className='explore'>
-            <form className='explore__search'>
+            <form className='explore__search' onSubmit={searchTweets}>
                 <input className='search__input' type='text' placeholder='Search tweets ..' value={input} onChange={(e) => setInput(e.target.value)} />
                 <SearchIcon className='search__icon' onClick={searchTweets} />
                 <div className='explore__filters'>
