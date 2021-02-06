@@ -90,6 +90,6 @@ py manage.py migrate
 python manage.py runserver
 ```
 ### Picture Documentation
-![Home Page](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/788px-Adobe_XD_CC_icon.svg.png)
+![Home Page](https://i.imgur.com/TBfZWX7.png)
 
 
